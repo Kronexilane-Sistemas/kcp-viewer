@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "development"
+  ],
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not firefox <= 105"
+  ],
+  "hints": {
+    "compat-api/css": "off",
+    "no-inline-styles": "off",
+    "axe/name-role-value": "off",
+    "axe/forms": "off",
+    "axe/text-alternatives": "off",
+    "axe/parsing": "off",
+    "axe/structure": "off",
+    "compat-api/html": "off"
+  }
+}

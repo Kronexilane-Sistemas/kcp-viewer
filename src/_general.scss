@@ -1,0 +1,33 @@
+// Constantes generales
+$font-family:'Open sans';
+$font-size:16px;
+$azulkronexilaneoscuro:#286286;
+$azulkronexilaneclaro:#74B0CF;
+$griscapas:#F5F5F6;
+$naranjahover:#E79326;
+$grisfondo:#D0D0CE;
+
+.color-krn-oscuro{
+  color:$azulkronexilaneoscuro;
+  font-weight: bold;
+}
+
+.bg-gray{
+  background-color: $grisfondo;
+}
+
+.bg-kronexilane-oscuro{
+  background-color: #286286;
+}
+.bg-kronexilane-claro {
+  background-color:#74B0CF
+}
+.drag-selection-off{
+  pointer-events: none;
+  user-select: none;
+  user-zoom: none;
+}
+.drag-selection-none{
+  user-select: none;
+  user-zoom: none;
+}

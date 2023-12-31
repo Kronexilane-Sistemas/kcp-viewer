@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Principal",
+    "user": "default__user",
+    "password": "default__user",
+    "description": "Portafolio principal",
+    "img": "",
+    "default": true
+  }
+]

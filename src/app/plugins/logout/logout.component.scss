@@ -1,0 +1,45 @@
+@import "../../../general";
+
+// Estilos para el enlace de cierre sesion
+.close-session {
+  font-weight: 400;
+  font-size: small;
+  cursor: pointer;
+
+  &:hover {
+    width: 100%;
+    background-color: $azulkronexilaneclaro;
+
+    color: white;
+
+    a {
+      color: white;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+
+  }
+}
+
+.close-session-simple {
+  display: flex;
+  font-size: 1em;
+  font-weight: 400;
+  margin: auto;
+  padding: 5px;
+  color: #74B0CF;
+  justify-content: center;
+
+  a{
+    color: $azulkronexilaneclaro;
+    text-decoration: none;
+    cursor: pointer;
+    span{
+      font-size:small;
+      font-weight: 300;
+    }
+  }
+}

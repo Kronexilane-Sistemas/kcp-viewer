@@ -1,0 +1,51 @@
+@import "/src/general";
+
+input[type="text"],
+input[type="password"] {
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 20px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  &::placeholder {
+    font-size: small;
+    color: gray;
+  }
+
+}
+
+.button-go {
+  background-color: red !important;
+}
+
+.password-error {
+  font-weight: bold;
+  color: red;
+}
+
+.password-ok {
+  font-weight: bold;
+  color: green !important;
+}
+
+.table
+{
+  span{
+    font-size: 1.2em;
+    font-weight: 600;
+    color: black;
+  }
+  tr{
+    text-align: start;
+    border-bottom: none;
+
+  }
+
+}

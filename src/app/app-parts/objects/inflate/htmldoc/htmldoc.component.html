@@ -1,0 +1,29 @@
+<!-- Scrolleadores y toolbars -->
+<scrolling-button [ButtonStyle]="'square'"></scrolling-button>
+<scrolling-button [ButtonStyle]="'previous'" [PreviousFunction]="Volver()"></scrolling-button>
+<scrolling-button [ButtonStyle]="'toolbar'" [ToolbarButtons]="Botones()"></scrolling-button>
+
+<!-- HEADER -->
+<div class="col-12 d-flex flex-row justify-content-center w-100 mt-2">
+  <!-- Barra de menús para pantallas grandes -->
+  <app-mainmenu1 *ngIf="parametrosHeader.has('menu') && parametrosHeader.get('menu')!=''" idtext="docmenu"
+    [menutext]="parametrosHeader.get('menu')" class="d-none d-md-inline">
+  </app-mainmenu1>
+</div>
+<app-docheader [kcp-item]="docitem" [parameters]="docitem!.documentflow[0]"
+  (jumpheader)="ContentHREF($event)"></app-docheader>
+  <app-rmainmenu2 *ngIf="parametrosHeader.has('menu') && parametrosHeader.get('menu')!=''"
+  [menutext]="parametrosHeader.get('menu')" [ButtonStates]="['Abrir menú documento','Cerrar menú documento']"
+  [ShowAsTable]="parametrosHeader.get('rstyle')" [DecorateTable]="parametrosHeader.get('rdecorated')"
+  class="d-md-none d-inline" [MoreInfo]="parametrosHeader.get('rmoreinfo')">
+</app-rmainmenu2>
+<!-- Inyección HTML -->
+<div class="row">
+  <div class="col-12" id="destino">
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<app-docfooter [kcp-item]="docitem" [parameters]="parametrosFooter" (jumpheader)="ContentHREF($event)">
+</app-docfooter>

@@ -1,0 +1,154 @@
+<!-- Plugin de Búsqueda para modo responsive/móvil -->
+<div *ngIf="responsive else noresponsive">
+  <div class="row form-responsive m-4">
+    <div class="col-12">
+      <form class="form-group w-100" [formGroup]="formSearch1" (ngSubmit)="BusquedaBasica(formSearch1.value)">
+        <div class="row">
+          <div class="col-12 text-center mb-1">
+            <span class="title-noresponsive-search">Búsqueda en el portafolios</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex flex-row justify-content-center">
+            <input type="search" formControlName="textFilter" name="" placeholder="Palabras clave" spellcheck="false">
+            <input title="Buscar" alt="buscar" src="assets/search9.png" type="image" class="ms-1 mt-auto mb-auto" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Plugin de Búsqueda para la barra de menú principal-->
+<ng-template #noresponsive>
+  <div class="row">
+    <div class="col-12">
+      <form class="form-group w-100" [formGroup]="formSearch1" (ngSubmit)="BusquedaBasica(formSearch1.value)">
+        <div class="row">
+          <div class="col-12 d-flex">
+
+            <input [disabled]="formSearch1.invalid" alt="buscar" src="assets/search13.png" type="image"
+              style="width:24px; height:24px;" [ngClass]="{'opacity-25': formSearch1.invalid}"
+              title="Lanzar búsqueda" />
+            <input *ngIf="asearch" title="Personalizar la búsqueda" (click)="AbrirBusquedaAvanzada()" alt="buscar"
+              src="assets/searchA.png" type="image" style="width:24px; height:24px;" class="ms-1" [id]="discriminator2"
+              [disabled]="this.asearchActive" />
+
+            <input type="search" formControlName="textFilter" name="textFilter" placeholder="Indique búsqueda"
+              spellcheck="false">
+            <button *ngIf="cache" title="Recuperar la última búsqueda" (click)="CacheBusqueda()" alt="buscar"
+              style="width:24px; height:24px;" class="ms-1" type="button"
+              class="d-flex justify-content-center border border-0 bg-white ms-1">
+              <img src="assets/historical.png" style="width:24px; height:24px;" alt="">
+            </button>
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</ng-template>
+
+
+
+<!-- Formulario de búsqueda avanzada -->
+<div class="advanced-search shadow" [id]="discriminator1">
+  <div *ngIf="getTitle()!=undefined" class="col-12 d-flex flex-column align-items-center mt-2 title-search">
+    <h3>{{getTitle()[0]}}</h3>
+    <h4>{{getTitle()[1]}}</h4>
+  </div>
+  <!-- Formulario de búsqueda avanzada -->
+  <div class="row">
+    <form class="row" [formGroup]="formSearch2" (ngSubmit)="BusquedaAvanzada(formSearch2.value)">
+      <div class="col-11 " [ngClass]="{'mt-4': !special}">
+        <div class="form-asearch w-10">
+          <div class="row d-flex flex-row justify-content-between ms-2">
+            <!-- Texto y Fechas -->
+            <div class="col-6 justify-content-between">
+              <label>Texto a localizar</label>
+              <input class="form-control" formControlName="text" type="text" value=""
+                placeholder="Escriba un texto o palabras clave" />
+              <!-- Fechas -->
+              <div class="row mt-1  d-flex flex-row justify-content-between" [ngClass]="{'mt-4': !special}">
+                <div class="col-6">
+                  <label>Fecha inicial</label>
+                  <input formControlName="initD" type="date" class="form-control" />
+                </div>
+                <div class="col-6 m-0">
+                  <label>Fecha final</label>
+                  <input formControlName="finalD" type="date" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <!-- Tags e Items -->
+            <div class="col-6 justify-content-between">
+              <div class="row">
+                <div class="col-12 d-flex flex-column align-items-center">
+                  <button type="button" (click)="MostrarTags()"
+                    class="d-flex flex-row justify-content-center border border-0 bg-transparent mt-auto">
+                    <img src="assets/tag.png" style="width: 20px; height: 20px;" alt="">
+                    <span class="ms-1 text-white small">Tags disponibles...</span>
+                  </button>
+
+                  <input class="form-control mt-1" formControlName="tags" type="text" readonly
+                    placeholder="Tipos de TAG a buscar" />
+
+                </div>
+              </div>
+              <div class="row mt-1" [ngClass]="{'mt-4': !special}">
+                <div class="col-12 d-flex flex-column align-items-center">
+                  <button type="button" (click)="MostrarTipos()"
+                    class="d-flex flex-row justify-content-center border border-0 bg-transparent mt-auto">
+                    <img src="assets/search2.png" style="width: 20px; height: 20px;" alt="">
+                    <span class="ms-1 text-white small">Tipos de items ...</span>
+                  </button>
+                  <input class="form-control mt-1" formControlName="items" type="text" value=""
+                    placeholder="Tipos de item a buscar" readonly />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Título de búsqueda y tipo de presentación-->
+          <div *ngIf="special" class="row d-flex flex-row justify-content-between ms-2 mt-2">
+            <div class="col-6">
+              <label>Título de la búsqueda</label>
+              <input formControlName="title" class="form-control" type="text" value=""
+                placeholder="Escriba un título para la búsqueda" />
+            </div>
+            <div class="col-6">
+              <label>Formato de la presentación</label>
+              <select formControlName="type" class="form-select" name="">
+                <option value="1">Tabla de resultados</option>
+                <option value="2">Tarjetas estilo simple</option>
+                <option value="3">Tarjetas estilo blog</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL DE BOTONES-->
+      <div class="col-1 d-flex flex-column h-100 align-items-start justify-content-center mt-2">
+        <button type="submit" [disabled]="formSearch2.invalid" title="Enviar consulta"
+          class="d-flex flex-row justify-content-center p-1 border border-0 bg-transparent">
+          <img src="assets/button-search.png" style="width: 24px; height: 24px;" alt="">
+        </button>
+        <button type="button" class="d-flex flex-row justify-content-center p-1 border border-0 bg-transparent mt-2"
+          title="Borrar formulario">
+          <img src="assets/button-clear.png" style="width: 24px; height: 24px;" alt="" (click)="Reset()">
+        </button>
+        <button type="button" class="d-flex flex-row justify-content-center p-1 border border-0 bg-transparent mt-2"
+          title="Cerrar búsqueda avanzada" (click)="AbrirBusquedaAvanzada()">
+          <img src="assets/button-close.png" style="width: 24px; height: 24px;" alt="">
+        </button>
+        <button *ngIf="special" type="button" [disabled]="this.keySearch==''"
+          class="d-flex flex-row justify-content-center p-1 border border-0 bg-transparent mt-4"
+          title="Copiar clave de búsqueda" [ngClass]="{'opacity-50': this.keySearch==''}"
+          (click)="CopiarClaveDeBusqueda()">
+          <img src="assets/button-copy.png" style="width: 24px; height: 24px;" alt="">
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

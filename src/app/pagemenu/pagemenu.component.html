@@ -1,0 +1,36 @@
+<!--
+      *************************************************
+        MENÚ GENÉRICO PARA PÁGINA
+      *************************************************
+-->
+<div *ngIf="MenuContainer!=null && MenuContainer.subitems.length>0" class="submenu centrado">
+  <ul>
+    <li *ngFor="let melement of MenuContainer.subitems">
+      <!-- Creación elemento <a> con RouterLink o HREF -->
+      <!-- [routerLink]="[melement.router]"-->
+      <!--[ngClass]="{'center-img-text':melement.urlimg!=''}"-->
+      <a *ngIf="melement.router!=='' else _href" [routerLink]="[melement.router]"
+        class="d-flex flex-row justify-content-center align-items-center">
+        <div class="imagen" *ngIf="melement.itemtype==3">
+          <img *ngIf="melement.urlimg!='' else imgstd" src="{{melement.urlimg}}" alt="" class="img-fluid">
+          <ng-template #imgstd>
+            <img src="assets/categories/{{melement.itemtype}}.png" alt="" class="img-fluid">
+          </ng-template>
+        </div>
+        <span class="ms-1" *ngIf="melement.itemtype==3">{{melement.title}}</span>
+      </a>
+      <ng-template #_href>
+
+        <a *ngIf="melement.href!==''" href="{{melement.href}}" class="d-flex flex-row justify-content-center align-items-center" >
+          <div class="imagen" *ngIf="melement.itemtype==3">
+            <img *ngIf="melement.urlimg!='' else imgstd2" src="{{melement.urlimg}}" alt="" class="img-fluid">
+            <ng-template #imgstd2>
+              <img src="assets/categories/{{melement.itemtype}}.png" alt="" class="img-fluid">
+            </ng-template>
+          </div>
+          <span class="ms-1">{{melement.title}}</span>
+        </a>
+      </ng-template>
+    </li>
+  </ul>
+</div>

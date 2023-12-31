@@ -1,0 +1,52 @@
+<!--
+  *************************************************
+  Estilos de botón:
+    circle: Círculo (subir arriba)
+    square: Cuadrado (subir arriba)
+    previous: Cuadrado (Cuadrado ir atrás)
+  Estilos extendidos (activable con la tecla ESC):
+    toolbar: Barra de herramientas
+  ********************************^^^^^^^^^^^^^^^^^^
+-->
+
+<!-- Selección -->
+<span [ngSwitch]="buttontype">
+
+  <!-- CIRCULO (IR ARRIBA)-->
+  <div *ngSwitchCase="'circle'" id="buttonC" class="button-circle-scrolling" (click)="GoUp()"></div>
+
+  <!-- CUADRADO (IR ARRIBA) -->
+  <div *ngSwitchCase="'square'" class="">
+    <div class="row button-square-scrolling" id="buttonS" (click)="GoUp()">
+      <div class="col-12">
+        <img src="assets/arriba8.png" alt="" class="img-fluid">
+      </div>
+    </div>
+  </div>
+
+  <!-- CUADRADO (IR ATRÁS) -->
+  <div *ngSwitchCase="'previous'" class="">
+    <div class="row button-square-previous-scrolling" id="buttonP" (click)="GoPrevious()">
+      <div class="col-12">
+        <img src="assets/contraer.png" alt="" class="img-fluid">
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div *ngSwitchCase="'toolbar'">
+    <div class="row toolbar-scrolling text-center border border-1 rounded rounded-2 shadow" id="buttonT">
+      <div *ngFor="let item of Buttons" class="d-inline">
+        <button
+            type="button"
+            class="button-toolbar d-inline align-items-center ps-2 pe-2 border border-0 bg-white button-toolbar h-100"
+            title="{{item.tooltip}}"
+            (click)="Execute(item)"
+        >
+          <img src="assets/{{item.img}}" style="width:24px; height: 24px;" alt="" class="me-1">
+          <span class="small">{{item.text}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</span>

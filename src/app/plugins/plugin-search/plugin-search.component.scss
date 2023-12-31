@@ -1,0 +1,156 @@
+@import "../../../general";
+
+// Ventana de búsqueda avanzada
+.advanced-search {
+  --opacidad-negro: 0.4;
+  display: none;
+  position: absolute;
+  background-image: linear-gradient(rgba(0, 0, 0, var(--opacidad-negro)), rgba(0, 0, 0, var(--opacidad-negro))), url("/assets/advanced-search.jpg");
+  background-color: white;
+  background-size: cover;
+  background-position: cover;
+  left: -2px;
+  width: 102%;
+  height: 300px;
+  z-index: -4100;
+}
+
+
+// -- Modo general para cuadros de edición de texto --
+%editBox {
+  margin-left: 10px;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid gray;
+
+  &::placeholder {
+    font-size: medium;
+    font-weight: 600;
+    opacity: 40%;
+  }
+
+  &::-webkit-search-cancel-button {
+    margin: 2px;
+    color: $azulkronexilaneoscuro;
+    cursor: pointer;
+  }
+
+  &::spelling-error {
+    background-color: red;
+  }
+
+  &:focus {
+    outline: none;
+
+    color: black;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  text-align: center;
+}
+
+// -- Entrada de textos (%editBox sólo para cuadro de menú principal) --
+
+input[type="search"] {
+  @extend %editBox;
+}
+
+
+// -- Formateo pantalla de búsqueda avanzada --
+
+// -- Titulos --
+.title-search {
+  h3 {
+    color: $azulkronexilaneclaro;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  h4 {
+    font-size: 1.2em;
+    font-weight: 300;
+    color: white;
+  }
+}
+
+// -- Formulario --
+.form-asearch {
+  label {
+    color: white;
+    font-weight: 400;
+  }
+
+  input[type="text"],
+  input[type="date"] {
+    background-color: transparent;
+    color: white;
+
+    &::placeholder {
+      font-size: large;
+      font-weight: 600;
+      opacity: 60%;
+    }
+
+    &::placeholder {
+      font-size: smaller !important;
+      color: white !important;
+    }
+
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 14px;
+    margin: auto;
+    opacity: 0.9;
+    filter: invert(0.9);
+  }
+
+  select::-webkit-inner-spin-button {
+    cursor: pointer;
+    border-radius: 14px;
+    margin: auto;
+    opacity: 0.9;
+    filter: invert(0.9);
+  }
+
+  select {
+    background-image: url('/assets/select-down.png');
+    background-color: transparent;
+    color:white;
+    cursor: pointer;
+    option{
+      background-color:$azulkronexilaneclaro;
+      font-weight: bold;
+    }
+  }
+}
+
+// -- Cuadro de búsqueda estilo responsive --
+.form-responsive {
+
+  input[type="text"],
+  input[type="search"] {
+    border: 2px solid $azulkronexilaneclaro;
+    border-radius: 10px;
+    font-size: large;
+
+    &::-webkit-search-cancel-button {
+      margin: 10px;
+      color: $azulkronexilaneoscuro;
+      cursor: pointer;
+    }
+
+  }
+
+  .title-noresponsive-search {
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+
+
+}

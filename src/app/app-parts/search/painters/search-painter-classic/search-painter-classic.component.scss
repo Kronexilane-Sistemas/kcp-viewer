@@ -1,0 +1,47 @@
+@import "/src/_general";
+
+.tag-navigator {
+  text-decoration: none;
+  font-size: smaller;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 50%;
+  }
+}
+
+.go-link {
+  text-decoration: none;
+  font-weight: 400;
+}
+
+button {
+  &:hover {
+    opacity: 50%;
+  }
+}
+
+// Propiedades para formato RESPONSIVE (MÓVIL)
+.iname {
+  color: black;
+  font-size: small;
+
+}
+
+.ititle {
+  color: $azulkronexilaneoscuro;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.isubtitle {
+  color: $azulkronexilaneclaro;
+  font-size: small;
+  font-weight: 600;
+}
+
+.hover {
+  &:hover {
+    cursor: pointer;
+  }
+}

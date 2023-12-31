@@ -1,0 +1,98 @@
+<!-- Estilo 1, Registros con Barra de botones-->
+<nav class="paginator-container" *ngIf="!BetweenPages else betweenPages">
+  <ul class="paginator">
+    <li><a class="btn btn-link" (click)="First();">&#10096;</a></li>
+    <li><a class="btn btn-link" (click)="Previous();">&#10094;</a></li>
+    <li class="paginator-info">
+      <a class="btn btn-link" (click)="Select();">
+        <div *ngIf="!ShortInfo else ShowShortInfo">
+          Página {{CurrentPage+1}} de {{TotalPages}} <span *ngIf="ShowNumberOfRegisters">({{TotalRegisters}}
+            Registros)</span>
+        </div>
+        <ng-template #ShowShortInfo>
+          {{CurrentPage+1}}/{{TotalPages}}<span *ngIf="ShowNumberOfRegisters">/{{TotalRegisters}}</span>
+        </ng-template>
+      </a>
+    </li>
+    <li><a class="btn btn-link" (click)="Next();">&#10095;</a></li>
+    <li><a class="btn btn-link" (click)="Last();">&#10097;</a></li>
+  </ul>
+  <ul class="paginator buttons">
+    <li *ngFor="let fnt of ExtraFunctions">
+      <a class="btn btn-link d-flex justify-content-center" [ngClass]="{'disabled':!fnt.activated}"
+        (click)="fnt.extraFunction(fnt.FunctionParameter)">
+        <img *ngIf="fnt.img!=''" src="{{fnt.img}}" alt="" class="me-2 mb-1 mt-1">
+        <span *ngIf="fnt.title!''">{{fnt.title}}</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Estilo 2, Entre-páginas con Barra de botones-->
+<ng-template #betweenPages>
+  <div *ngIf="this.TotalPages>1">
+    <div *ngIf="!this.BootstrapStyle else BootStrap">
+      <nav class="paginator-container">
+        <ul class="paginator">
+          <li *ngIf="this.swArrows"><a class="btn btn-link" (click)="First2();">&#10096;</a></li>
+          <li *ngIf="this.swArrows"><a class="btn btn-link" (click)="Previous2();">&#10094;</a></li>
+          <li *ngFor="let n of this.BetweenPagesArray; let t=index" class="paginator-info">
+            <a id="I{{t}}" class="{{'btn btn-outline-primary '+PageMarked(n)}} rounded rounded-0 button-visor" (click)="Select2(n)"
+              href="javascript:void(0);"><span class="small">{{n}}</span></a>
+          </li>
+          <li *ngIf="this.swArrows"><a class="btn btn-link" (click)="Next2();">&#10095;</a></li>
+          <li *ngIf="this.swArrows"><a class="btn btn-link" (click)="Last2();">&#10097;</a></li>
+        </ul>
+        <ul class="paginator buttons mt-1">
+          <li *ngFor="let fnt of ExtraFunctions">
+            <a class="btn btn-link d-flex justify-content-center" [ngClass]="{'disabled':!fnt.activated}"
+              (click)="fnt.extraFunction(fnt.FunctionParameter)">
+              <img *ngIf="fnt.img!=''" src="{{fnt.img}}" alt="" class="me-2 mb-1 mt-1">
+              <span *ngIf="fnt.title!''">{{fnt.title}}</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Estilo 3, Entre-páginas BOOTSTRAP -->
+<ng-template #BootStrap>
+  <nav class="mt-2 paginator-container">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0);" aria-label="Previous" (click)="First2()">
+          <span aria-hidden="true">&#10096;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0);" aria-label="Previous" (click)="Previous2()">
+          <span aria-hidden="true">&#10094;</span>
+        </a>
+      </li>
+      <li *ngFor="let n of this.BetweenPagesArray" class="page-item">
+        <a class="page-link" (click)="Select2(n)" href="javascript:void(0);">{{n}}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0);" aria-label="Next" (click)="Next2()">
+          <span aria-hidden="true">&#10095;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0);" aria-label="Next" (click)="Last2()">
+          <span aria-hidden="true">&#10097;</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="paginator buttons">
+      <li *ngFor="let fnt of ExtraFunctions">
+        <a class="btn btn-link d-flex justify-content-center" [ngClass]="{'disabled':!fnt.activated}" e3
+          (click)="fnt.extraFunction(fnt.FunctionParameter)">
+          <img *ngIf="fnt.img!=''" src="{{fnt.img}}" alt="" class="me-2 mb-1 mt-1">
+          <span *ngIf="fnt.title!''">{{fnt.title}}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</ng-template>

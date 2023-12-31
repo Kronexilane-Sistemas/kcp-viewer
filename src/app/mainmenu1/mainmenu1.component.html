@@ -1,0 +1,75 @@
+<!--
+   Clases de estilo de menú principal
+  ELEMENTO    CLASE           ACCIÓN
+    <a>    menu-header-main   Efecto de subrayado animado en el header
+    <li>   krn-menu-dropdown  Abrir menú desplegable
+    <div>  krn-menu-list      Ventana de menú desplegable
+    <li>   krn-menu-element   Elemento de opción
+    <hr>   krn-menu-separator Separador de opciones
+    <a>    krn-img-text       Alinea correctamente imagen y texto si ambos aparecen <img><span>
+-->
+<div class="menu-principal drag-selection-none" *ngIf="MenuActivate" id="menu-main" (mouseleave)="Cerrar()">
+  <nav class="me-3">
+    <img src="assets/load_.gif" id="{{idtext}}" alt="" style="width: auto; height: 32px;" class="loading">
+    <ul class="d-flex flex-row flex-wrap justify-content-start">
+
+      <li *ngFor="let melement of kcpmenu?.subitems; let indice=index" class="krn-menu-dropdown"
+        [ngClass]="{'krn-menu-separator': !melement.hide}" (mouseenter)="Cerrar()">
+        <!-- Creación elemento <a> con RouterLink o HREF -->
+        <a *ngIf="melement.router!=='' && melement.itemtype<=5 && !melement.hide else _href"
+          [routerLink]="[melement.router]" class="menu-header-main" [ngClass]="{'krn-img-text':melement.urlimg!=''}">
+          <img *ngIf="melement.urlimg!=''" src="{{melement.urlimg}}" style="width:24px; height:24px" alt="">
+          <span>{{melement.title}}</span>
+        </a>
+        <ng-template #_href>
+          <a *ngIf="melement.href!=='' && melement.itemtype<=5 && !melement.hide" href="{{melement.href}}"
+            class="menu-header-main" [ngClass]="{'krn-img-text':melement.urlimg!=''}">
+            <img *ngIf="melement.urlimg!=''" src="{{melement.urlimg}}" style="width:24px; height:24px" alt="">
+            <span>{{melement.title}}</span>
+          </a>
+        </ng-template>
+
+        <!-- Creación de un menú desplegable -->
+
+        <a id="d{{this.idtext}}{{indice}}" *ngIf="melement.subitems.length!=0 && !melement.hide"
+          class="menu-header-main" (click)="Abrir(indice)" (mouseenter)="Cerrar()">
+          <img *ngIf="melement.urlimg!=''" src="{{melement.urlimg}}" style="width:24px; height:24px" alt="">
+          <span class="ms-2">{{melement.title}}</span>
+        </a>
+        <div id="{{this.idtext}}{{indice}}" *ngIf="melement.subitems!=undefined && !melement.hide" class="krn-menu-list"
+          (mouseleave)="Cerrar()">
+          <ul>
+            <li *ngFor="let msubelement of melement.subitems" class="krn-menu-element text-start">
+              <!-- Creación elemento <a> con RouterLink o HREF -->
+              <a *ngIf="msubelement.router!=='' && !msubelement.hide && !msubelement.hide else _href"
+                [routerLink]="[msubelement.router]" [ngClass]="{'krn-img-text':msubelement.urlimg!=''}">
+                <img *ngIf="msubelement.urlimg!=''" src="{{msubelement.urlimg}}" alt="" class="ms-2"
+                  style="width:24px; height:24px">
+                <span class="ms-1">{{msubelement.title}}</span>
+              </a>
+              <ng-template #_href>
+                <a *ngIf="msubelement.href!=='' && !msubelement.hide  else _separatorOrplugin"
+                  href="{{msubelement.href}}" [ngClass]="{'krn-img-text':msubelement.urlimg!=''}">
+                  <img *ngIf="msubelement.urlimg!=''" src="{{msubelement.urlimg}}" style="width:24px; height:24px"
+                    class="ms-2" lt="">
+                  <span class="ms-1">{{msubelement.title}}</span>
+                </a>
+              </ng-template>
+
+              <ng-template #_separatorOrplugin>
+                <hr *ngIf="msubelement.title==='' && msubelement.plugins==='' && !msubelement.hide else _textplugin"
+                  class="krn-menu-separator">
+              </ng-template>
+              <ng-template #_textplugin>
+                <!--
+                <ng-container *ngComponentOutlet="InyectarComponente(msubelement.plugins)"></ng-container>
+                -->
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+
+      </li>
+    </ul>
+  </nav>
+</div>

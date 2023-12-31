@@ -1,0 +1,70 @@
+@import "/src/general";
+
+// Bloque de texto HOVER
+.text-block {
+  &:hover {
+    cursor: pointer;
+    opacity: 60%;
+  }
+}
+
+// Tipografías básicas de text-block
+h3,
+h5 {
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+  font-stretch: condensed;
+}
+
+p {
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+  font-size: larger !important;
+  text-rendering: geometricPrecision;
+}
+
+h3 {
+  font-weight: 800;
+}
+
+h5 {
+  color: $azulkronexilaneoscuro;
+  font-weight: bold;
+}
+
+quote{
+  font-size: small;
+  font-style: italic;
+  color: $azulkronexilaneoscuro;
+}
+// ---------- PARA IMPRIMIR ------------------
+@media print {
+
+  video {
+    display: none !important;
+  }
+
+  iframe {
+    display: none !important;
+  }
+
+  img {
+    display: none !important;
+  }
+
+  p {
+    text-align: justify;
+    font-family: sans-serif;
+    font-size: 12px;
+  }
+
+  // Adicionales de página
+  @page {
+    margin: 2em;
+    size: 3em;
+
+    @top-left {
+      display: none;
+    }
+
+
+  }
+}

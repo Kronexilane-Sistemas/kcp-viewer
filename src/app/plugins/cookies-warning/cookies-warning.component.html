@@ -1,0 +1,24 @@
+<!-- Cuadro de diálogo de más portafolios -->
+<div class="modal fade" id="cookiesWarning" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-static" style="min-width: 800px; min-height: 100%;" >
+    <div class="m-auto modal-content bg-white border-warning border border-4 d-flex flex-column align">
+
+      <div class="modal-header w-100 d-flex flex-column">
+        <img src="assets/logo.png" class="m-auto" alt="">
+        <div class="row mt-4">
+          <strong class="title-warning">{{setup.title}}</strong>
+        </div>
+        <p class="mt-2" style="text-align: justify;">
+          {{setup.text}}
+        </p>
+        <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+      </div>
+
+      <div class="modal-body align-self-end h-100 d-flex flex-column">
+        <div class="modal-footer border border-0 mt-auto">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Configurar</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,50 @@
+@import "/src/_general.scss";
+cite{
+  font-size: 0.9em;
+  a{
+    font-size: 0.9em;
+  }
+}
+.link-head {
+  font-size: 0.8em;
+  font-family:monospace;
+  text-decoration: none;
+  font-weight: 300;
+  color: $azulkronexilaneclaro;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: $azulkronexilaneoscuro;
+  box-shadow: 1px 1px 1px $azulkronexilaneoscuro;
+  color:white ;
+  &:hover {
+    opacity: 60%;
+  }
+}
+.footer-micro-label{
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.references-link{
+  a{
+    color:$azulkronexilaneoscuro;
+    font-size: 0.8em;
+    font-weight:600;
+    text-decoration: none;
+    &:hover{
+      color:$azulkronexilaneclaro;
+    }
+  }
+  span{
+    margin-left: 5px;
+    margin-top:auto;
+    margin-bottom: auto;
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tag-bottom{
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,206 @@
+@import "/src/general";
+$border-size: 20px;
+$color-titulo-small: white;
+$color-titulo-big: white;
+
+#preload-01 { background: linear-gradient(rgba(0, 0, 0, var(--opacidad-negro)), rgba(0, 0, 0, var(--opacidad-negro))), url("/assets/login-big.jpg");}
+#preload-01 { background: linear-gradient(rgba(0, 0, 0, var(--opacidad-negro2)), rgba(0, 0, 0, var(--opacidad-negro))), url("/assets/login-small.jpg")};
+/*
+  SCSS Para pantalla de login multipropósito
+*/
+.container-login-full-screen {
+  --opacidad-negro:0.31 ;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  background-image:linear-gradient(rgba(0, 0, 0, var(--opacidad-negro)), rgba(0, 0, 0, var(--opacidad-negro))), url("/assets/login-big.jpg");
+  background-repeat: repeat;
+  background-position: center;
+  background-size:cover;
+
+  .main-container {
+    border-radius: $border-size;
+    width: 70%;
+
+    .login-img {
+      border-radius: $border-size;
+      margin: 0;
+      padding: 0;
+      background-color: blueviolet;
+
+      img {
+        border-right: 1px solid gray;
+        max-width: 100%;
+        height: 100%;
+        border-bottom-left-radius: $border-size;
+        border-top-left-radius: $border-size;
+      }
+    }
+
+    .app-name {
+      font-family: 'Open Sans', sans-serif;
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: 600;
+    }
+
+    .app-msg {
+      font-size: 0.8em;
+      text-align: center;
+      color: red;
+      font-weight: 600;
+    }
+
+    .login-controls {
+
+      input[type="text"],
+      input[type="password"] {
+        border: none;
+        border-bottom: 1px solid black;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:active {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: $azulkronexilaneoscuro;
+        }
+
+      }
+
+      input[type="submit"] {
+        border-radius: 10px;
+        border: 1px solid black;
+
+        &:hover {
+          background-color: white;
+        }
+      }
+    }
+
+  }
+}
+
+/*
+  Estilos caja LOGIN
+*/
+.login-box {
+  width: 100%;
+  background-color: rgba(81, 83, 83, .0);
+  border-radius: 20px;
+
+  h1,
+  h4,
+  h3,h5 {
+    color: $color-titulo-big;
+  }
+}
+
+.default-credentials {
+  font-size: 0.9em !important;
+  text-decoration: none;
+  margin-top: 20px !important;
+  color: white !important;
+
+  &:hover {
+    border: 1px solid white;
+  }
+}
+
+input[type="text"],
+input[type="password"] {
+  background-color: transparent;
+  color:palegreen;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 1px solid white !important;
+
+  &::placeholder {
+    color:white;
+    font-weight: 400;
+    opacity: 80%;
+  }
+}
+
+input[type="submit"] {
+  border-radius: 20px;
+  border: 0;
+  font-size:medium;
+  width: 100px;
+  margin: 10px;
+  color:white;
+  opacity: 100%;
+  &:hover {
+    opacity: 80%;
+  }
+  &:enabled{
+    color:black;
+  }
+}
+
+.default-credentials {
+  font-size: small;
+  color: white;
+  margin-top: 10px;
+}
+
+.title-portfolios {
+  font-stretch: extra-expanded;
+}
+
+h1 {
+  font-size: 3.5em;
+  font-weight: 800;
+  font-stretch:ultra-expanded;
+  color: $azulkronexilaneoscuro !important;
+  -webkit-text-stroke-color:lightblue;
+  -webkit-text-stroke-width: 1px;
+  ;
+}
+
+@media only screen and (max-width : 900px) {
+  .container-login-full-screen {
+    --opacidad-negro2: 0.3;
+    background-image: linear-gradient(rgba(0, 0, 0, var(--opacidad-negro2)), rgba(0, 0, 0, var(--opacidad-negro))), url("/assets/login-small.jpg");
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+
+  .text-warning{
+    color:yellow !important;
+  }
+  input[type="text"],
+  input[type="password"] {
+    background-color: #3D75A6;
+    box-shadow: 2px 3px 6px #284662;
+  }
+
+  .login-box {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    h1,
+    h4,
+    h3 {
+      color: $color-titulo-small;
+    }
+    h1{
+      font-size: 2.0em !important;
+      color: white !important;
+        -webkit-text-stroke-color: black;
+        -webkit-text-stroke-width: 1px;
+    }
+  }
+}

@@ -1,0 +1,82 @@
+<div class="row" *ngIf="fragment!=null">
+  <div class="col-12 d-flex flex-column justify-content-center">
+    <div class="row">
+      <div class="col-12 d-flex flex-row justify-content-center m-2">
+        <button type="submit" class="align-items-center ps-2 pe-2 border border-0 bg-white button-hover"
+          (click)="OrderBy('name',fragment)">
+          <img src="assets/alpha.png" alt="" class="me-1">
+          <strong class="small">Nombre</strong>
+        </button>
+        <button type="submit" class="align-items-center ps-2 pe-2 border border-0 bg-white"
+          (click)="OrderBy('type',fragment)">
+          <img src="assets/type.png" alt="" class="me-1">
+          <strong class="small">Tipo</strong>
+        </button>
+        <button type="submit" class="align-items-center ps-2 pe-2 border border-0 bg-white"
+          (click)="OrderBy('date',fragment)">
+          <img src="assets/date.png" alt="" class="me-1" style="width: 16px; height: 16px;">
+          <strong class="small">Fecha</strong>
+        </button>
+      </div>
+    </div>
+
+    <!-- Para pantallas estándar -->
+    <table class="table d-md-table d-none">
+      <thead>
+        <tr>
+          <th scope="col">Imagen</th>
+          <th scope="col">Objeto</th>
+          <th scope="col">Información adicional</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let item of fragment" class="p-0 text-black-50">
+          <th scope="row">
+            <img [src]="getImage(item)" onerror="this.src='/assets/error-img.png';" class="img-fluid"
+              style="width: 64px; height: auto;" alt="">
+          </th>
+          <td>
+            <a href="javascript:void(0)" class="go-link" (click)="ItemSelected(item)"><strong>{{item.name}}</strong></a>
+            <br>
+            <span class="text-black-50">{{ChoiceTitle(item.title)}}</span>
+          </td>
+          <td class="d-flex flex-column">
+            <strong class="text-dark small">{{item.itemdescription}}</strong>
+            <span class="text-black-50">{{item.subtitle}}</span>
+            <span class="text-dark small fst-italic fs-7 ">{{item.date}}</span>
+          </td>
+          <!--<td>
+            <a href="javascript:void(0)" class="tag-navigator justify-content-center"
+              *ngFor="let i of item.tags; let z=index" title="Elementos con el tag '{{i}}'">
+              {{i}}<span *ngIf="item.tags[z]!='' && z!=item.tags.length-1">,</span>
+            </a>
+          </td>-->
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Para pantallas tipo móvil -->
+    <div class="row d-flex d-md-none mt-md-0 mt-2">
+      <h1 class="text-center">Resultados</h1>
+      <div class="col-12">
+        <hr>
+
+
+        <div class="row" *ngFor="let item of fragment" (click)="ItemSelected(item)"
+          class="p-1 text-black-50  w-100 d-flex flex-row align-items-center mb-2 hover">
+          <div class="col-9 d-flex flex-column justify-content-start">
+            <span class="small ititle">{{ChoiceTitle(item.title)}}</span>
+            <span class="small isubtitle">{{item.subtitle}}</span>
+            <span class="small idescription">{{item.itemdescription}}</span>
+            <span class="small idescription">{{item.date}}</span>
+          </div>
+          <div class="col-3 text-center">
+            <img [src]="getImage(item)" onerror="this.src='/assets/error-img.png';" class="img-fluid"
+              style="width: 64px; height: auto;" alt="">
+            <span class="small iname">{{item.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

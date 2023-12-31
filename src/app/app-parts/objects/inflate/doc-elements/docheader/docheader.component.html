@@ -1,0 +1,27 @@
+<div *ngIf="docitem!=undefined" class="mt-1 mb-3" id="docheader">
+  <!-- HEADER  -->
+  <div class="row mt-3 work text-center d-flex flex-row-reverse">
+    <div class="col-12 mt-2">
+      <h1>{{docitem.title}}</h1>
+      <h2 class="">{{docitem.subtitle}}</h2>
+      <a href="javascript:void(0)" *ngIf="docitem.itemtype==2 || docitem.itemtype==0" class="link-head"
+        (click)="JumpTo('date|'.concat(docitem.date.toLocaleString()))"><img src="assets/date.png" alt="">&nbsp;<span
+          class="mt-auto">{{getSimpleDate(docitem.date)}}</span>
+      </a>
+    </div>
+      <div class="col-12 text-center" class="img-fluid">
+        <img *ngIf="this.parameters.has('image') && this.parameters.get('image')" src="{{SelectImage(docitem)}}" class="w-50 mb-2"
+          alt="" [ngClass]="
+            {
+              'rounded rounded-circle':this.parameters.has('imagecircle') && this.parameters.get('imagecircle'),
+              'shadow':this.parameters.has('imageshadow') && this.parameters.get('imageshadow'),
+              'border border-1':this.parameters.has('imageborder') && this.parameters.get('imageborder')
+            }
+            "
+            class="w-25 h-auto mt-4"
+          >
+      </div>
+  </div>
+
+</div>
+

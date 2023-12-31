@@ -1,0 +1,231 @@
+<!--
+###############################
+ Formato menú simple responsive
+###############################
+-->
+<!-- Botón de apertura del menú responsive -->
+<div *ngIf="!table && this.MenuActivate" class="row d-flex flex-row justify-content-center mt-2">
+  <a class="btn btn-link open-button d-flex flex-row justify-content-between" (click)="OpenMenu()">
+    <span id="text-button2{{idtext}}" class="text-undecorated small m-auto">{{this.status[0]}}</span>
+  </a>
+
+</div>
+
+<!-- Header del menú responsive -->
+<div *ngIf="!table else asTable">
+  <div class="menu-main menu-principal drag-selection-none bg-white" *ngIf="MenuActivate" id="{{idtext}}">
+    <!-- menú responsive -->
+    <nav class="mt-4 d-flex flex-column" [style]="menuwidth">
+      <div class="row mb-2" *ngIf="!allLinks">
+        <div class="col-12 col-12 d-flex flex-row justify-content-start">
+          <a type="button" class="btn btn-link expand-button" (click)="Expand()">
+            <img id="r2expand{{idtext}}" src="assets/expandir.png" alt="">
+            <span id="rt2expand{{idtext}}" class="text-dark ms-1 small text-white text-decoration-none">
+              Expandir todo
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <ul class="d-flex flex-column justify-content-start w-100 m-0 p-0">
+        <li *ngFor="let melement of kcpmenu?.subitems; let indice=index" class="krn-menu-dropdown"
+          [ngClass]="{'krn-menu-separator': !melement.hide}">
+          <!-- Creación elemento <a> con RouterLink o HREF -->
+          <a *ngIf="melement.router!=='' && melement.itemtype<=5 && !melement.hide else _href"
+            [routerLink]="[melement.router]" class="menu-header-main" [ngClass]="{'krn-img-text':melement.urlimg!=''}">
+            <span class="ms-2 d-flex flex-row align-items-center"><img *ngIf="melement.urlimg!=''"
+                src="{{melement.urlimg}}" alt="" style="width:24px; height: 24px;">{{melement.name}}</span>
+            <img src="{{getLinkImg(melement)}}" alt="">
+          </a>
+          <ng-template #_href>
+            <!--[ngClass]="{'krn-img-text':melement.urlimg!=''}"-->
+            <a *ngIf="melement.href!=='' && melement.itemtype<=5 && !melement.hide" href="{{melement.href}}"
+              class="menu-header-main">
+              <span class="ms-2">{{melement.name}}</span>
+              <img src="{{getLinkImg(melement)}}" alt="">
+            </a>
+          </ng-template>
+          <!-- Creación de un menú desplegable -->
+
+          <a id="ddd{{this.idtext}}{{indice}}" *ngIf="melement.subitems.length!=0 && !melement.hide"
+            class="menu-header-main" (click)="Slide(indice)">
+            <span class="ms-2">{{melement.title}}</span>
+            <img src="{{getLinkImg(melement)}}" alt="">
+          </a>
+
+
+
+          <div id="{{this.idtext}}{{indice}}" *ngIf="melement.subitems!=undefined && !melement.hide"
+            class="krn-menu-list p-2">
+            <ul>
+              <li *ngFor="let msubelement of melement.subitems" class="krn-menu-element text-start">
+                <!-- Creación elemento <a> con RouterLink o HREF -->
+                <a *ngIf="msubelement.router!=='' && !msubelement.hide && !msubelement.hide else _href"
+                  [routerLink]="[msubelement.router]" [ngClass]="{'krn-img-text':msubelement.urlimg!=''}">
+                  <img *ngIf="msubelement.urlimg!=''" src="{{msubelement.urlimg}}" alt=""
+                    style="width:24px; height: 24px;">
+                  <span class="ms-1">{{msubelement.title}}</span>
+                </a>
+                <ng-template #_href>
+                  <a *ngIf="msubelement.href!=='' && !msubelement.hide  else _separatorOrplugin"
+                    href="{{msubelement.href}}" [ngClass]="{'krn-img-text':msubelement.urlimg!=''}">
+                    <img *ngIf="msubelement.urlimg!=''" src="{{msubelement.urlimg}}" alt=""
+                      style="width:24px; height: 24px;">
+                    <span class="ms-1">{{msubelement.title}}</span>
+                  </a>
+                </ng-template>
+
+                <ng-template #_separatorOrplugin>
+                  <hr *ngIf="msubelement.title==='' && msubelement.plugins==='' && !msubelement.hide else _textplugin"
+                    class="krn-menu-separator">
+                </ng-template>
+                <ng-template #_textplugin>
+                  <!--
+                <ng-container *ngComponentOutlet="InyectarComponente(msubelement.plugins)"></ng-container>
+                -->
+                </ng-template>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
+
+<!--
+#################
+ Formato de tabla
+#################
+-->
+<ng-template #asTable>
+  <div class="menu-main menu-principal drag-selection-none bg-white d-inline" *ngIf="MenuActivate" id="{{idtext}}">
+    <!-- menú responsive -->
+    <nav class="mt-2 d-flex flex-column p-2" [ngClass]="{'border border-2 rounded rounded-4 shadow': decorated}">
+      <div class="row mt-1">
+        <div class="col-12 d-flex flex-column align-items-center">
+          <span id="Imagen{{this.idtext}}">
+            <img src="assets/load_.gif" alt="" style="width: 32px; height: 32px;" class="loading">
+            <span class="text-dark">Leyendo tabla de enlaces</span>
+          </span>
+
+          <span class="table-title">{{kcpmenu?.title}}</span>
+          <span class="table-subtitle">{{kcpmenu?.subtitle}}</span>
+        </div>
+      </div>
+      <div class="row mb-2" *ngIf="!allLinks">
+        <div id="Expand{{this.idtext}}"
+          class="col-12 d-md-flex flex-md-row justify-content-md-start d-flex flex-row justify-content-center">
+          <a type="button" class="btn btn-link expand-button" (click)="Expand()">
+            <img id="r2expand{{idtext}}" src="assets/expandir.png" alt="">
+            <span id="rt2expand{{idtext}}" class="text-dark ms-1 small text-white text-decoration-none">
+              {{this.txtExpandStatus[1]}}
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <ul class="d-flex flex-column justify-content-start w-100 m-0 p-0">
+        <li *ngFor="let melement of kcpmenu?.subitems; let indice=index" class="krn-menu-dropdown"
+          [ngClass]="{'krn-menu-separator': !melement.hide}">
+
+          <!--
+              Elementos iniciales (botones)
+          -->
+          <a *ngIf="melement.router!=='' && melement.itemtype<=5 && !melement.hide else _href"
+            [routerLink]="[melement.router]"
+            class="menu-header-main d-md-flex flex-md-row justify-content-md-between flex-column align-items-center w-100"
+            [ngClass]="{'krn-img-text':melement.urlimg!=''}">
+            <span class="ms-2 text-center">{{melement.title}}</span>
+            <div class="row">
+              <span *ngIf="info" class="ms-2 menu-header-info justify-content-sm-center">{{melement.router}}</span>
+            </div>
+            <img src="{{getLinkImg(melement)}}" alt="">
+          </a>
+          <ng-template #_href>
+            <a *ngIf="melement.href!=='' && melement.itemtype<=5 && !melement.hide" href="{{melement.href}}"
+              class="menu-header-main d-md-flex flex-md-row justify-content-md-between flex-column align-items-center">
+              <span class="ms-2 table-subtitle text-start">{{melement.title}}</span>
+              <div class="row">
+                <span *ngIf="info"
+                  class="ms-md-2 menu-header-info align-self-center">{{melement.itemtype!=3?melement.subtitle:melement.href}}</span>
+              </div>
+              <!--<span *ngIf="info" class="ms-2 text-dark small d-md-inline d-none d-imp">{{melement.subtitle}}</span>-->
+              <img src="{{getLinkImg(melement)}}" alt="">
+            </a>
+          </ng-template>
+
+          <!--
+               #############
+               CAPAS DE MENÚ
+               #############
+          -->
+          <a id="ddd{{this.idtext}}{{indice}}" *ngIf="melement.subitems.length!=0 && !melement.hide"
+            class="menu-header-main d-md-flex flex-md-row justify-content-md-between flex-column align-items-center"
+            (click)="Slide(indice)">
+            <span class="ms-2">{{melement.title}}</span>
+
+            <img src="{{getLinkImg(melement)}}" alt="">
+          </a>
+          <!--
+            ###########
+            DESPLIEGUES
+            ###########
+          -->
+          <div id="{{this.idtext}}{{indice}}" *ngIf="melement.subitems!=undefined && !melement.hide"
+            class="krn-menu-list p-2">
+            <ul>
+              <li *ngFor="let msubelement of melement.subitems" class="krn-menu-element text-start">
+                <!-- Creación elemento <a> con RouterLink o HREF -->
+                <a *ngIf="msubelement.router!=='' && !msubelement.hide && !msubelement.hide else _href"
+                  [routerLink]="[msubelement.router]" [ngClass]="{'krn-img-text':msubelement.urlimg!=''}"
+                  class="d-md-flex flex-md-row w-100 justify-content-md-between ">
+                  <div class="row">
+                    <div class="col-12 d-md-flex flex-md-row justify-content-md-start text-md-start text-center">
+                      <img *ngIf="msubelement.urlimg!=''" src="{{msubelement.urlimg}}" alt=""
+                        style="width:24px; height: 24px;">
+                      <span class="ms-1">{{msubelement.title}}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <span *ngIf="info"
+                      class="text-dark font-monospace small d-md-inline text-center text-md-start">{{msubelement.router}}</span>
+                  </div>
+                </a>
+                <ng-template #_href>
+                  <a *ngIf="msubelement.href!=='' && !msubelement.hide  else _separatorOrplugin"
+                    href="{{msubelement.href}}" [ngClass]="{'krn-img-text':msubelement.urlimg!=''}"
+                    class="d-md-flex flex-md-row w-100 justify-content-md-between">
+                    <div class="row">
+                      <div class="col-12 d-md-flex flex-md-row justify-content-md-start text-md-start text-center">
+                        <img *ngIf="msubelement.urlimg!=''" src="{{msubelement.urlimg}}" alt=""
+                          style="width:24px; height: 24px;">
+                        <span class="ms-1">{{msubelement.title}}</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <span *ngIf="info"
+                        class="text-dark font-monospace small d-md-inline text-center text-md-start">{{msubelement.href}}</span>
+                    </div>
+                  </a>
+                </ng-template>
+
+                <ng-template #_separatorOrplugin>
+                  <hr *ngIf="msubelement.title==='' && msubelement.plugins==='' && !msubelement.hide else _textplugin"
+                    class="krn-menu-separator">
+                </ng-template>
+                <ng-template #_textplugin>
+                  <!--
+                  <ng-container *ngComponentOutlet="InyectarComponente(msubelement.plugins)"></ng-container>
+                  -->
+                </ng-template>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</ng-template>

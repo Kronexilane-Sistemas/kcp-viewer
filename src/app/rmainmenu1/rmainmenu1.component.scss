@@ -1,0 +1,96 @@
+@import "krn-rmenus";
+
+$color_text: #B1743E;
+.hover_button{
+  &:hover{
+    background-color:lightcyan
+  }
+}
+// -- Capa completa de pantalla --
+.menu-main {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 48px;
+  background-color: $azulkronexilaneoscuro !important;
+  margin: 0px;
+  padding: 0px;
+}
+
+// -- separador hr --
+hr {
+  color: white;
+
+
+}
+
+//--- Titulos de cabecera ---
+.menu-title-dynamic {
+  font-size: 1.8em;
+  font-weight: 800;
+  color: white;
+
+  -webkit-text-stroke-color: $azulkronexilaneoscuro;
+  -webkit-text-stroke-width: 1px;
+}
+
+.menu-subtitle-dynamic {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: wheat;
+}
+
+.responsive-open-button {
+  color: #B1743E;
+  text-decoration: none !important;
+  font-size: 1em;
+}
+
+//--- Elementos de menú ---
+
+.menu-principal {
+  nav {
+    ul {
+      position: relative;
+      list-style: none;
+      margin: auto;
+      width: 100%;
+      li {
+        margin-right: 20px;
+        margin-bottom: 5px;
+
+        a {
+          &.menu-header-main {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-decoration: none;
+
+            font-weight: 600;
+            color: white;
+            position: relative;
+
+            span {
+              font-weight: 100;
+              font-size: 1.2em;
+              font-stretch: ultra-expanded;
+              color: transparent;
+              -webkit-text-stroke-color: white;
+              -webkit-text-stroke-width: 1px;
+            }
+          }
+        }
+
+      }
+    }
+    div{
+      a[type="button"]{
+        text-decoration: none !important
+      }
+    }
+  }
+}

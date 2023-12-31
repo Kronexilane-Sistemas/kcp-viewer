@@ -1,0 +1,50 @@
+<!--<scrolling-button [ButtonStyle]="'square'"></scrolling-button>
+<scrolling-button [ButtonStyle]="'previous'" [PreviousFunction]="Volver()"></scrolling-button>
+<scrolling-button [ButtonStyle]="'toolbar'" [ToolbarButtons]="Botones()"></scrolling-button>-->
+<div class="container-xxl">
+  <div class="row w-100 mt-4">
+    <div class="col-12 d-flex flex-row justify-content-center w-100">
+      <!-- Barra de menús para pantallas grandes -->
+      <app-mainmenu1 *ngIf="parametrosHeader.has('menu') && parametrosHeader.get('menu')!=''" idtext="docmenu"
+        [menutext]="parametrosHeader.get('menu')" class="d-none d-md-inline">
+      </app-mainmenu1>
+    </div>
+  </div>
+  <app-docheader [kcp-item]="docitem" [parameters]="parametrosHeader" (jumpheader)="ContentHREF($event)">
+  </app-docheader>
+  <app-rmainmenu2 *ngIf="parametrosHeader.has('menu') && parametrosHeader.get('menu')!=''"
+    [menutext]="parametrosHeader.get('menu')" [ButtonStates]="['Abrir menú documento','Cerrar menú documento']"
+    [ShowAsTable]="parametrosHeader.get('rstyle')" [DecorateTable]="parametrosHeader.get('rdecorated')"
+    class="d-md-none d-inline" [MoreInfo]="parametrosHeader.get('rmoreinfo')">
+
+  </app-rmainmenu2>
+  <!--
+    BUCLE DE COMPOSICIÓN DEL DOCUMENTO
+  -->
+
+  <div class="row mt-4">
+    <div *ngFor="let docpart of docitem?.documentflow; let indice=index;">
+      <div [ngSwitch]="docpart.component">
+        <!-- Componente de tipo CONTENIDO -->
+        <div *ngSwitchCase="'doccontent'" id="COCO">
+          <app-doccontent (linkto)="ContentHREF($event)" [parameters]="docpart"></app-doccontent>
+        </div>
+        <div *ngSwitchCase="'doctable'" class="mb-3">
+          <app-rmainmenu2 [menutext]="docpart.menu" [DecorateTable]="docpart.decorated" [MoreInfo]="docpart.moreinfo"
+            [ShowAsTable]="true">
+          </app-rmainmenu2>
+        </div>
+        <div *ngSwitchCase="'doccontact'" class="mb-3">
+          <app-doccontact [parameters]="docpart"></app-doccontact>
+        </div>
+        <div *ngSwitchDefault>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- footer *ngIf="docitem?.itemtype==2" -->
+  <app-docfooter [kcp-item]="docitem" [parameters]="parametrosFooter" (jumpheader)="ContentHREF($event)">
+  </app-docfooter>
+
+</div>

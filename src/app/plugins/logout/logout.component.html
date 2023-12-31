@@ -1,0 +1,24 @@
+<div *ngIf="SimpleLogout==undefined || !SimpleLogout else Simple">
+  <div class="container">
+    <div class="row-cols-1 border">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/8Z1xxRUanWU" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+  <!--<div  class="col-12 p-2 close-session w-100">
+    <a class="btn btn-link" class="ms-2" (click)="Logout()">
+      <img src="assets/exit.png" class="img-fluid" alt="">
+      <span class="ms-1">Cerrar sesión</span>
+    </a>
+  </div>-->
+</div>
+
+<ng-template #Simple>
+  <div class="col-12 p-2 close-session-simple">
+    <a class="btn btn-link logout-simple" class="ms-2" (click)="Logout()">
+      <img src="assets/logout2.png" style="width: 24px; height: 24px;" class="img-fluid" alt="">
+      <span class="ms-1 small text-light">Cerrar sesión y acceder a otros portafolios</span>
+    </a>
+  </div>
+</ng-template>

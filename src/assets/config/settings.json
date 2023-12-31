@@ -1,0 +1,57 @@
+[
+  {
+    "names": [
+      "*"
+    ],
+    "logout": true,
+    "search": true,
+    "search_caching": false,
+    "visitcounter": true,
+    "userspecialfunctions": "invitacion",
+    "logo": false,
+    "menucenter": false,
+    "headerframe": "none",
+    "navigatorimg": "small",
+    "footermenuposition": "down",
+    "cookieswarning": false,
+    "cookiestitle": "AVISO DE PRIVACIDAD",
+    "cookiestext": "¿ACEPTAMOS COOKIES Y SEGUIMIENTO?",
+    "plugins": []
+  },
+  {
+    "names": [
+      "Principal"
+    ],
+    "logout": true,
+    "logo": false,
+    "menucenter": false,
+    "search": true,
+    "search_caching": true,
+    "visitcounter": true,
+    "userspecialfunctions": "invitacion",
+    "headerframe": "none",
+    "navigatorimg": "none",
+    "footermenuposition": "up",
+    "cookieswarning": false,
+    "cookiestitle": "Aviso de cosas",
+    "cookiestext": "¿ACEPTAMOS PULPO?",
+    "plugins": [
+      {
+        "command": "search",
+        "border": false
+      },
+      {
+        "title": "Presentaciones recientes",
+        "command": "presentation",
+        "border": true,
+        "icon": true
+      },
+      {
+        "title": "Trabajos recientes",
+        "command": "work",
+        "border": true,
+        "icon": true
+      }
+    ]
+  }
+]

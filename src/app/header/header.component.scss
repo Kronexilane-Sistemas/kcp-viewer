@@ -1,0 +1,11 @@
+.cabecera{
+  margin:0;
+  background-size:cover;
+  box-shadow:0px 0px 10px black;
+}
+
+@media print {
+  *{
+    display: none !important;
+  }
+}

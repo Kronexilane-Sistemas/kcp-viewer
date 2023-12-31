@@ -1,0 +1,90 @@
+@import "/src/_general.scss";
+
+/** Formato de los titulos **/
+.presentation {
+  h1 {
+    font-size: 3em;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-weight: 600;
+    color: green;
+  }
+}
+.work {
+  h1 {
+    font-size: 3.5em;
+    font-weight: 800;
+    color:$azulkronexilaneclaro;
+      -webkit-text-stroke-color: gray;
+      -webkit-text-stroke-width: 1px;
+  }
+
+  h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: $azulkronexilaneoscuro;
+    -webkit-text-stroke-color: gray;
+      -webkit-text-stroke-width: 1px;
+  }
+}
+.link-head {
+  font-size: 1.1em;
+  text-decoration: none;
+  font-weight: bold;
+  color: $azulkronexilaneoscuro;
+
+  &:hover {
+    color: $azulkronexilaneclaro;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .work{
+    h1{
+      font-size: 2em;
+      color: $azulkronexilaneclaro;
+      -webkit-text-stroke-color: gray;
+      -webkit-text-stroke-width: 1px;
+    }
+  }
+  .presentation {
+    h1 {
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1em;
+      text-align: center;
+    }
+  }
+
+  .link-head {
+    text-align: center;
+  }
+}
+
+@media print {
+  a{
+    display: none !important;
+  }
+
+  h2{
+    margin-top:50px
+  }
+
+  #docheader{
+    border:none !important;
+  }
+  // Adicionales de página
+  @page {
+    margin: 0;
+    size: auto;
+
+    @top-left {
+      display: none;
+    }
+  }
+}

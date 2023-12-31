@@ -1,0 +1,55 @@
+<div class="col-12 d-flex flex-column align-items-center text-center mt-3">
+  <img src="assets/desarrollo.png" style="width: 15%; height: 100%;" class="mb-1" />
+  <h5 class="section-title h1 mt-2">{{config.Title}}</h5>
+</div>
+
+
+<section>
+  <div class="container py-2 mt-2">
+    <article class="postcard light blue" *ngFor="let item of fragment; let i=index">
+      <a class="postcard__img_link" href="javascript:void(0)" (click)="IrA(item)">
+        <img onerror="this.src='/assets/search-card-default.jpg';" class="postcard__img" [src]="getImage(item)"
+          alt="Image Title" />
+      </a>
+      <div class="postcard__text t-dark">
+        <h1 class="postcard__title blue ms-1"><a href="javascript:void(0)" (click)="IrA(item)">{{item.itemdescription}}</a></h1>
+        <div class="postcard__subtitle small ms-1">
+          <time datetime="2020-05-25 12:00:00">
+            <i class="fas fa-calendar-alt mr-2 me-1"></i>{{item.date}}
+          </time>
+        </div>
+        <div class="postcard__bar ms-1"></div>
+        <!-- Texto si es un trabajo, presentación o documento WEB (RESUMEN)-->
+        <div *ngIf="item.itemtype<=2  else nowork" class="postcard__preview-txt ms-1">
+          <h4 class="fs-4">{{getTitle(item)}}</h4>
+          <h5 class="fs-6">{{getSubTitle(item)}}</h5>
+          <hr>
+          {{getResume(item)}}
+        </div>
+        <ng-template #nowork>
+          <!-- Texto si es CONTENEDOR, ENLACE o DESCARGA-->
+          <div class="postcard__preview-txt ms-1">
+            <h4>{{getTitle(item)}}</h4>
+            <h5>{{getSubTitle(item)}}</h5>
+            <hr>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam ab aut perferendis asperiores,
+            perspiciatis nihil ea non esse? Optio, deserunt error et saepe ut facere nihil. Ad sunt magnam veniam,
+            voluptatum, cumque deserunt accusantium corrupti adipisci quae, odit recusandae temporibus?
+          </div>
+
+        </ng-template>
+
+        <ul class="postcard__tagbox ms-1">
+          <!--<li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>-->
+          <!-- <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>-->
+          <li class="tag__item play blue">
+            <a href="javascript:void(0)" (click)="IrA(item)">
+              <i class="fas fa-play mr-2 me-1">
+              </i>Quiero ir aquí
+            </a>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>

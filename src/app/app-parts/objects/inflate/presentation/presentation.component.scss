@@ -1,0 +1,25 @@
+@media print {
+
+  // Apagar botones de subida/atrás, toolbar...
+  scrolling-button {
+    display: none !important;
+  }
+
+  app-docfooter {
+    display: none !important;
+  }
+
+  app-rmainmenu2 {
+    display: none !important;
+  }
+
+  // Adicionales de página
+  @page {
+    margin: 0;
+    size: auto;
+
+    @top-left {
+      display: none;
+    }
+  }
+}

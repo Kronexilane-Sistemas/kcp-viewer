@@ -1,0 +1,51 @@
+<!-- ************ CABECERA CENTRAL GENERAL **************** -->
+<div id="cabecera" *ngIf="!navigator else IsNavigator"
+  class="cabecera row w-100 m-0 p-0 d-flex flex-column flex-column-reverse align-content-center d-md-flex flex-md-row justify-content-center"
+  style="background-image:linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url({{this.images[0]}}); height: 300px; background-size:cover; background-position: center; background-blend-mode: darken;">
+
+  <!--[ngClass]="{'mt-4':frame=='square'}-->
+  <!-- IMAGEN -->
+
+  <div class="col-6 m-auto col-md-3 d-md-flex">
+    <!-- Sin frame -->
+    <div *ngIf="frame=='none' || frame=='' else ConFrame" class="mt-md-4 mt-md-auto d-md-fle ">
+      <img src="{{this.images[1]}}" style="max-height: 300px; max-width: 100%;">
+    </div>
+
+    <!-- Con frame -->
+    <ng-template #ConFrame>
+      <div *ngIf="frame=='square' else circle" class="w-100 h-100 mt-4 mt-md-auto">
+        <img src="{{this.images[1]}}" class="img-fluid border border-2 rounded rounded-3" alt="">
+      </div>
+    </ng-template>
+    <ng-template #circle>
+      <div *ngIf="frame=='circle' else circle" class="w-100 h-100 pt-3">
+        <img src="{{this.images[1]}}" class="img-fluid border border-1 rounded rounded-circle" alt="">
+      </div>
+    </ng-template>
+
+</div>
+  <!-- TITULOS -->
+
+
+  <div class="col-12 col-md-9 mt-md-auto mb-md-auto mt-4" [ngClass]="{'w-100':this.images[1]==''}">
+    <app-pagetitle [navigator]="navigator" [titulo]="titulo" [subtitulo]="subtitulo" [autor]="autor"
+      [PortfolioName]="titleComposed" [headerimg]="this.images[1]!=''" [navigatorimg]="this.image">
+    </app-pagetitle>
+
+</div>
+</div>
+
+<!-- ************ CABECERA CENTRAL SÓLO PARA NAVEGADOR DE ITEMS **************** -->
+<ng-template #IsNavigator>
+  <div id="cabecera" class="cabecera row w-100 m-0 p-0 d-flex justify-content-center"
+    style="background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url({{this.images[0]}}); height: 300px; background-position: center; background-blend-mode: darken;">
+
+      <div class="row w-100">
+        <app-pagetitle [navigator]="navigator" [PortfolioName]="titleComposed" [titulo]="titulo" [subtitulo]="subtitulo"
+          [autor]="autor" [icon]="this.images[1]" [links]="links">
+        </app-pagetitle>
+      </div>
+
+  </div>
+</ng-template>

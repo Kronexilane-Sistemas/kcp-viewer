@@ -1,0 +1,13 @@
+//
+
+.construction{
+  background-image: url(/assets/computer.png);
+}
+
+input[type="password"]{
+  border-radius: 10px;
+  &::placeholder{
+    font-size: small;
+  }
+}
+

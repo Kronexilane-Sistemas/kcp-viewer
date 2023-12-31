@@ -1,0 +1,139 @@
+@import "krn-rmenus";
+
+$color_text: #B1743E;
+// -- Textos
+.table-title{
+  font-size: 1.5em;
+  font-stretch: expanded;
+  font-weight: 800;
+  color:$azulkronexilaneclaro;
+
+}
+.table-subtitle{
+  font-size: 1em ;
+  font-weight: 600;
+  color: gray;
+}
+// -- Capa completa de pantalla --
+.menu-main {
+  display: none;
+  position: relative;
+  width: 100%;
+  background-color: white !important;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  &.open-button {
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    &:hover{
+      text-decoration: underline;
+    }
+    span {
+      color:$azulkronexilaneoscuro;
+    }
+  }
+}
+
+a {
+  &.expand-button {
+    text-decoration: none;
+    color: black;
+
+    span {
+      color: $azulkronexilaneoscuro;
+    }
+  }
+}
+
+// -- separador hr --
+hr {
+  color: white;
+}
+
+//--- Titulos de cabecera ---
+.menu-title-dynamic {
+  font-size: 1.8em;
+  font-weight: 800;
+  color: white;
+
+  -webkit-text-stroke-color: $azulkronexilaneoscuro;
+  -webkit-text-stroke-width: 1px;
+}
+
+.menu-subtitle-dynamic {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: wheat;
+}
+
+.responsive-open-button {
+  color: #B1743E;
+  text-decoration: none !important;
+  font-size: 1em;
+}
+
+//--- Elementos de menú ---
+
+.menu-principal {
+  nav {
+    a {
+      &.expand-button {
+        span {
+          font-size: small;
+          font-weight: 100;
+          color: $azulkronexilaneoscuro !important;
+        }
+      }
+
+    }
+
+    ul {
+      position: relative;
+      list-style: none;
+      margin: auto;
+      width: 100%;
+
+      li {
+        margin-right: 20px;
+        margin-bottom: 5px;
+
+        a {
+          &.menu-header-main {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-decoration: none;
+
+            font-weight: 600;
+            color: black !important;
+            position: relative;
+
+            span {
+              font-weight: 600;
+              font-size: 1.2em;
+              font-stretch: ultra-expanded;
+              color: $azulkronexilaneoscuro;
+
+
+              &.menu-header-info{
+                color:black;
+                font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-weight:600;
+                font-size:medium;
+                margin-top: auto;
+                margin-left: auto;
+                margin-right: auto;
+              }
+            }
+          }
+
+        }
+
+      }
+    }
+  }
+}

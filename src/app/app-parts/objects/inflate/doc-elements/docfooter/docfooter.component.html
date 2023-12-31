@@ -1,0 +1,30 @@
+<hr *ngIf="(docitem!=undefined && parameters.get('tags') && docitem.tags.length>=1 && docitem.tags[0]!='') || parameters.get('path')">
+
+<div *ngIf="docitem!=undefined" class="mt-2">
+  <div class="row w-100">
+    <div class="col-12">
+      <div *ngIf="parameters.get('tags')"
+        class="text-light d-md-flex flex-md-row d-sm-flex flex-sm-column justify-content-center mt-md-auto">
+        <span *ngIf="docitem.tags.length>=1 && docitem.tags[0]!=''" class="text-dark me-2 mt-auto mb-xxl-auto footer-micro-label">Temas:</span>
+        <div *ngFor="let e of docitem.tags; let indice=index" class="tag-bottom">
+          <a *ngIf="e!=''" href="javascript:void(0)" class="link-head" [ngClass]="{'ms-2':e!=''}" (click)="JumpTo('tag|'.concat(docitem.tags[indice]))">
+            <img src="assets/tag4.png" alt="">{{e}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row w-100">
+  <div class="col-12 w-100 mt-2" *ngIf="parameters.has('buttons') && parameters.has('decoratetable') && parameters.has('moreinfo') && parameters.has('path')"
+      class="w-100 text-light d-md-flex flex-md-row d-sm-flex flex-sm-column justify-content-center mt-md-auto mt-md-2">
+      <app-rmainmenu2 *ngIf="parameters.get('path')!=''" [menutext]="parameters.get('path')" class="w-100"
+        [ShowAsTable]="parameters.get('buttons')==undefined" [ButtonStates]="parameters.get('buttons')"
+        [DecorateTable]="parameters.get('decoratetable')" [MoreInfo]="parameters.get('moreinfo')"
+
+        >
+      </app-rmainmenu2>
+
+  </div>
+</div>
+

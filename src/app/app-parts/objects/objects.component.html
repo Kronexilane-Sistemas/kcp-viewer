@@ -1,0 +1,56 @@
+<!-- Programa de petición de clave de acceso -->
+<!-- PETICIÓN DE CLAVE DE ACCESO-->
+<!-- <div class="container-xxl d-none" *ngIf="!docOK" id="passwordPetition"> -->
+
+<app-progress #progress1 id="miProgreso" [Hide]="docOK"></app-progress>
+<div class="container-xxl d-none" *ngIf="!docOK" id="passwordPetition">
+  <div class="row mt-3">
+    <div class="col-12 d-flex flex-column align-items-center w-100">
+      <h3 class="text-center">Documento no accesible</h3>
+      <h5 class="mt-2 text-danger">Probablemente esté en construcción</h5>
+      <img src="assets/cons1.gif" style="width: 20%; height: 100%;" alt="">
+      <span>{{msgPassword}}</span>
+      <form action="" class="w-100 text-center">
+        <input type="password" class="pass-special text-center mt-2 w-25 border border-2" id="clavePN" placeholder="Contraseña"
+           (keyup)="ActivateLink($event,item)" value="">
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- visualiza el Documento-->
+<div *ngIf="item!=undefined && docOK">
+  <div [ngSwitch]="item.itemtype">
+    <div *ngSwitchCase="0">
+      <app-htmldoc [item]="item" (jumpcontent)="getDocumentInfo($event)"></app-htmldoc>
+    </div>
+    <div *ngSwitchCase="1">
+      <app-presentation (jumpcontent)="getDocumentInfo($event)" [item]="item">
+      </app-presentation>
+    </div>
+    <div *ngSwitchCase="2">
+      <app-presentation (jumpcontent)="getDocumentInfo($event)" [item]="item">
+      </app-presentation>
+    </div>
+  </div>
+
+</div>
+
+<!--- Indicador de operacion -->
+<div class="modal fade" id="opInfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row d-flex w-100 flex-row justify-content-between">
+          <div class="col-4" style="width: 14%; height: 14%;">
+            <img src="assets/loading-22.gif" alt="" class="img-fluid">
+          </div>
+          <div class="col-8 mt-auto mb-auto">
+            <strong>Iniciando operaciones</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

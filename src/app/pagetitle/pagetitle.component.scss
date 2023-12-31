@@ -1,0 +1,138 @@
+// Colores componente titulo-web
+@import "/src/general";
+
+$colortitulo: white;
+$colorsubtitulo: white;
+
+// Estilos estándar para titulo de WEB
+.titulo-web {
+  text-align: center !important;
+
+  h1 {
+    color: $colortitulo;
+    font-size: 3.5em;
+    font-weight: bold;
+    -webkit-text-stroke-color: gray;
+    -webkit-text-stroke-width: 1px;
+  }
+
+  h3 {
+    font-size: 2.5em;
+    color: white;
+  }
+
+  h4 {
+    font-size: 1.5em;
+    color: $colorsubtitulo;
+  }
+
+}
+
+// Paddings cuando la imagen este junto al titulo.
+.paddings-small {
+  margin-bottom: 40px;
+}
+
+// Estilos para titulos sobre NAVEGADOR DE CATEGORIAS
+.nav-name {
+  font-size: 1.5em;
+  color: white;
+}
+
+.nav-title {
+
+  font-size: 2.1em;
+  font-weight: 600;
+  color: white;
+}
+
+.nav-path {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $azulkronexilaneclaro;
+  text-decoration: none;
+}
+
+.bg-kronexilane-oscuro {
+  color: white;
+}
+
+p {
+  font-size: 1em;
+  font-weight: bold;
+
+  &::first-line {
+    font-size: 1.5em;
+    color: $azulkronexilaneclaro;
+    font-weight: bold;
+  }
+}
+
+/** Tamaños para cuando sólo hay titulo y no imagen **/
+.titulo-web-sin-imagen {
+
+  h1 {
+    font-size: 2.5em !important;
+  }
+
+  h3 {
+    font-size: 1.5em !important;
+  }
+
+  h4 {
+    font-size: 1.25em !important;
+    color: gold !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .titulo-web {
+    text-align: center;
+
+
+    h1 {
+      color: $colortitulo;
+      font-size: 2.0em;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+    }
+
+    h3 {
+      font-size: 1.0em;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      color: $azulkronexilaneclaro !important;
+    }
+
+    h4 {
+      font-size: 1.1em;
+      font-weight: 600;
+      color: white;
+    }
+
+  }
+
+  .nav-name {
+    color: white;
+    margin-top: 10px;
+    padding: 0px !important;
+    font-size: 0.8em;
+    align-self: center;
+  }
+
+  .nav-title {
+    color: white;
+    font-size: 1.1em;
+    align-self: center;
+  }
+
+  .nav-path {
+    padding-top: 10px !important;
+    font-size: 0.8em;
+    font-weight: bold;
+    //color: $azulkronexilaneclaro;
+    align-self: center;
+  }
+
+}

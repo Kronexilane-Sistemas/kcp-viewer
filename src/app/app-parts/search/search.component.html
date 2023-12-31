@@ -1,0 +1,120 @@
+<!-- Componente de búsqueda -->
+
+<!--- Señalizador de Buscando -->
+<div id="progress" class="container p-4">
+  <div class="row">
+    <div class="col-12 d-flex flex-row justify-content-center p-2">
+      <span class="progress-search text-center">
+        <img src="assets/find-2.gif" style="width: 64px; height: 100%;" alt="">
+        Buscando en el portafolios...
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<!-- Lanzar la búsqueda -->
+<div id="searchShow" class="container-xxl">
+  <!-- Si hay resultados formatear salida con los painters -->
+  <div class="row" *ngIf="this.results!=undefined && this.results.length>0 else NoResults">
+    <!-- FORMATEADO CON EL PAINTER ESTÁNDAR (TABLA DE RESULTADOS) -->
+    <span [ngSwitch]="parameters.Type">
+      <div *ngSwitchCase="1">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center mt-2 justify-content-between">
+          <h1 class="title-search p-2 w-100 text-center d-flex flex-column">
+            <span class="text-black-50 ms-2 mb-1 align-content-center" *ngIf="this.showCached">
+              <img src="assets/find-1.gif" style="width: 24px; height: 24px;" alt="">
+              Caché de búsqueda: {{this.searchCached.DateTime | date :'dd/MM/yyyy HH:mm:ss'}}
+            </span>
+
+            <span class="title-search d-none d-md-flex justify-content-md-center align-items-md-center">
+              <img src="assets/results.jpg" style="width: 8%; height: 100%;" alt="">
+              {{parameters.Title}}
+            </span>
+            <krn-paginator class="ms-auto me-auto mt-3" [PageSize]="10" (PartialArray)="paginar($event)"
+              [DataSource]="this.results" [ShowNumberOfRegisters]="true" [ShortInfo]="false" [BetweenPages]="true"
+              [BootstrapStyle]="false" (PageSelected)="PageCurrent($event)" [NumberOfBetweenPages]="0"
+              [StepBetweenPages]="4" #paginatorSearch>
+            </krn-paginator>
+          </h1>
+          <span class="text-number d-md-flex d-none small text-dark-50 mb-1">
+            Se ha(n) encontrado&nbsp;<strong class="text-primary">{{this.results.length}}</strong>&nbsp;resultado(s)
+            coincidente(s)
+          </span>
+          <span class="text-number d-md-none d-flex small text-dark-50 mb-1">
+            <strong class="text-primary">{{this.results.length}}</strong>&nbsp;resultado(s)
+            coincidente(s)
+          </span>
+        </div>
+        <app-search-painter-classic (itemselected)="Selected($event)" [fragment]="fragment">
+        </app-search-painter-classic>
+      </div>
+
+      <!-- TARJETAS ESTÁNDAR -->
+      <div *ngSwitchCase="2">
+        <app-search-painter-card [config]="parameters" (itemselected)="Selected($event)" [fragment]="fragment">
+        </app-search-painter-card>
+        <div class="col-12 d-flex flex-column align-items-center w-100">
+          <krn-paginator class="ms-auto me-auto mt-3" [PageSize]="6" (PartialArray)="paginar($event)"
+            [DataSource]="this.results" [ShowNumberOfRegisters]="true" [ShortInfo]="false" [BetweenPages]="true"
+            [BootstrapStyle]="!false" (PageSelected)="PageCurrent($event)" [NumberOfBetweenPages]="0"
+            [StepBetweenPages]="4" #paginatorSearch>
+          </krn-paginator>
+          <span class="text-black-50 ms-2 mb-1 align-content-center" *ngIf="this.showCached">
+            <img src="assets/find-1.gif" style="width: 24px; height: 24px;" alt="">
+            Caché de búsqueda: {{this.searchCached.DateTime | date :'dd/MM/yyyy HH:mm:ss'}}
+          </span>
+        </div>
+      </div>
+
+      <!-- TARJETAS BONITAS -->
+      <div *ngSwitchCase="3">
+        <app-search-painter-pretty [config]="parameters" (itemselected)="Selected($event)" [fragment]="fragment">
+        </app-search-painter-pretty>
+        <div class="row">
+          <div class="col-12 d-flex flex-column align-items-center w-100">
+            <krn-paginator class="ms-auto me-auto mt-3" [PageSize]="10" (PartialArray)="paginar($event)"
+              [DataSource]="this.results" [ShowNumberOfRegisters]="true" [ShortInfo]="false" [BetweenPages]="true"
+              [BootstrapStyle]="false" (PageSelected)="PageCurrent($event)" [NumberOfBetweenPages]="0"
+              [StepBetweenPages]="4" #paginatorSearch>
+            </krn-paginator>
+            <span class="text-black-50 ms-2 mb-1 align-content-center" *ngIf="this.showCached">
+              <img src="assets/find-1.gif" style="width: 24px; height: 24px;" alt="">
+              Caché de búsqueda: {{this.searchCached.DateTime | date :'dd/MM/yyyy HH:mm:ss'}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </span>
+  </div>
+
+  <!-- No se ha encontrada nada -->
+  <ng-template #NoResults>
+    <div class="container-xxl mt-4">
+      <div class="row mt-auto mb-auto h-100 d-flex">
+        <div class="col-12 d-flex flex-column align-content-center w-100">
+          <h3 class="text-center err-title d-md-flex justify-content-center align-items-center d-none">
+            <img src="assets/no-results.png" alt="" class="ms-4" style="width: 64px; height: 64px;">
+            {{msgInfo}}
+          </h3>
+          <h3 class="text-center err-title d-md-none d-flex flex-column align-items-center">
+            <img src="assets/no-results.png" alt="" class="ms-4" style="width: 64px; height: 64px;">
+            {{msgInfo}}
+          </h3>
+          <strong class="d-flex flex-column justify-content-center text-center w-100 err-msg mt-2">
+            {{msgInfo2}}
+          </strong>
+
+          <div class="col-12 d-flex flex-row justify-content-center mt-3">
+            <plugin-search [asearch]="false" class="mt-2"></plugin-search>
+          </div>
+          <div class="col-12 d-flex flex-row justify-content-center mt-1">
+            <a [routerLink]="['/']" routerLinkActive="/" class="text-center mt-3 btn btn-primary btn-sm text-white">
+              Volver a la página de inicio
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

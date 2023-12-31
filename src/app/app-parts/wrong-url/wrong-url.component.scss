@@ -1,0 +1,18 @@
+@import "/src/_general";
+
+.err-msg{
+  font-family:'Courier New', Courier, monospace;
+  font-stretch: extra-expanded;
+  font-size: 1.2em;
+}
+.err-fmt {
+  font-family:monospace;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.err-title{
+  color:$azulkronexilaneoscuro;
+  font-size:x-large;
+  font-weight: 600;
+  text-align: center;
+}

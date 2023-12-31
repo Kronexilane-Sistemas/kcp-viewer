@@ -1,0 +1,61 @@
+--------------------------------------------------------------------
+Parámetros de inyección en el componente de maquetación "doccontent"
+Referencia básica
+--------------------------------------------------------------------
+component:                  El nombre del componente de maquetación.
+border (true/false):        Todo el conjunto de contenido tiene borde.
+shadow (true/false):        Todo el conjunto de contenido tiene sombra.
+padding (0 a 4 bootstrap):  Padding de los elementos del contenido respecto al borde.
+margin: (0 a 4 bootstrap):  Margin del conjunto rectangular de contenido respecto al TOP.
+title:                      titulo del elemento de texto.
+subtitle:                   subtitulo del elemento de texto.
+text:                       Texto, que podrá ser texto con formato HTML que se interpretará.
+                            Su ausencia hará que el contenedor solo tenga MEDIA (video/imagen).
+media:                      Multimedia, que podrá ser imagen o video. Su ausencia se interpretará
+                            como que el contenedor sólo tiene texto.
+mediatype:                  image|video|youtube-video
+reverse (true/false):       inversión del orden de elementos (video-texto, texto-video)
+
+
+----------------------------------------------------------------------
+Parámetros específicos o válidos dependiendo del mediatype
+----------------------------------------------------------------------
+
+*********************
+Con mediatype="image"
+*********************
+imageparams:                parámetros de imagen separados por comas
+                            ejemplo: "border,shadow,circle" (añade borde, sombra o forma circular)
+                            a la imagen.
+dimensions:                 Dimensiones CSS para tipo de medios=image o video no youtube,Acepta pixels (px y %)
+
+*****************************
+Con mediatype="youtube-video"
+*****************************
+
+youtubeparams:              parámetros de youtube separados por comas (ver referencia),
+                            ejemplo: controls=0, autoplay=0 ....
+width: height:              Tamaño del video de youtube: Acepta pixels (px) o %.
+
+
+*********************
+Con mediatype="video"
+*********************
+
+dimensions:                 Dimensiones CSS para tipo de medios=image o video no youtube,Acepta pixels (px y %)
+poster:                     URL de una imagen de "portada" antes de iniciar el video.
+autoplay (true/false):      Inicio de la reproducción de video automática.
+controls (true/false):      Controles del video.
+
+*********************
+Parámetros especiales
+*********************
+
+href (url)         :        url de salto. Su presencia con un valor indicará que el bloque
+                            de texto o de contenido es un link de salto a otra url.
+                            El formato es:
+
+                            "app|url" o "href|url"
+                            El parámetro 1 (izquierda) indica el tipo de salto
+                              app =routing angular
+                              href=enlace externo

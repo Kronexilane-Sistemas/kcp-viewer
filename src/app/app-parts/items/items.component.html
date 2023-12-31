@@ -1,0 +1,11 @@
+<div class="container-xxl">
+  <!-- RebuildSimpleKCPPath(this.PathParam)-->
+  <app-categories
+      [DataSource]="categorias"
+      [InitialPath]="PathParam"
+      (PathChange)="PathHasChange($event)"
+      [SearchElement]="'Work1'"
+  >
+  </app-categories>
+</div>
+

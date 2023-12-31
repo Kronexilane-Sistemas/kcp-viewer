@@ -1,0 +1,76 @@
+<div
+  class="row d-flex justify-content-center align-items-center p-{{this.parameters.has('padding')?this.parameters.get('padding'):'0'}} mb-{{this.parameters.has('margin')?this.parameters.get('margin'):'0'}}"
+  [ngClass]="{
+             'flex-row-reverse':this.parameters.has('reverse') && this.parameters.get('reverse'),
+             'border border-1':this.parameters.has('border') && this.parameters.get('border'),
+             'shadow':this.parameters.has('shadow') && this.parameters.get('shadow')
+             }">
+  <!-- Columna del medio (image/video)-->
+  <div class="col-12 col-md-6" *ngIf="this.parameters.has('media')" id="popo"
+    [ngClass]="{'col-md-12 d-flex justify-content-center':this.parameters.get('text')==null || this.parameters.get('text')==''}">
+    <div *ngIf="this.parameters.has('mediatype')">
+      <div [ngSwitch]="this.parameters.get('mediatype')">
+        <!-- *********** IMAGEN ****************** -->
+        <div *ngSwitchCase="'image'" class="w-100 d-flex justify-content-center mb-2">
+          <img class="img-fluid" *ngIf="this.parameters.get('media')!=null && this.parameters.get('media')!=''"
+            src="{{getPartOf(this.parameters.get('media'),0,',')}}" alt=""
+            [ngClass]="{'border border-2':this.parameters.has('imageparams') && this.parameters.get('imageparams').includes('border'),
+                                   'rounded rounded-circle':this.parameters.has('imageparams') && this.parameters.get('imageparams').includes('circle'),
+                                   'shadow':this.parameters.has('imageparams') && this.parameters.get('imageparams').includes('shadow')}"
+            [style]="this.parameters.get('imagedimensions') | cssdimensions">
+
+        </div>
+        <!-- *********** VIDEO DEL SERVIDOR ****************** -->
+        <div *ngSwitchCase="'video'">
+          <video controls [style]="this.parameters.get('dimensions') | cssdimensions"
+            [poster]="this.parameters.has('poster')?this.parameters.get('poster'):''"
+            [autoplay]="this.parameters.has('autoplay') && this.parameters.get('autoplay')"
+            [controls]="this.parameters.has('controls') && this.parameters.get('controls')"
+            [preload]="this.parameters.has('preload')?this.parameters.get('preload'):'auto'"
+            [muted]="true"
+            >
+
+            <source src="{{getPartOf(this.parameters.get('media'),0,',')}}">
+            Tu navegador no soporta vídeo
+          </video>
+        </div>
+        <!-- *********** VIDEO DE YOUTUBE ****************** -->
+        <div *ngSwitchCase="'youtube-video'">
+          <iframe width="{{this.parameters.has('width')?this.parameters.get('width'):'100%'}}"
+            height="{{this.parameters.has('height')?this.parameters.get('height'):'315px'}}"
+            [src]="getPartOf(this.parameters.get('media'),0,',').concat(this.parameters.has('youtubeparams')?(this.parameters.get('youtubeparams') | youtubeparams):'') | safe"
+            title="YouTube video player" frameborder="1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loop="1"
+            allowfullscreen
+            [style]="!this.parameters.has('text')?'min-width:'+this.currentwidth+'px; min-height:'+this.currentheigth+'px;':''">
+          </iframe>
+        </div>
+        <div *ngSwitchDefault>
+
+        </div>
+      </div>
+    </div>
+    <div class="row text-center">
+    <quote>{{getPartOf(this.parameters.get('media'),1,',')}}</quote>
+    </div>
+  </div>
+
+  <!-- Columna del texto -->
+  <span class="col-12 col-md-6 mt-4 mt-md-0" *ngIf="this.parameters.has('text')" [ngClass]="{
+                'col-md-12':this.parameters.get('media')==null || this.parameters.get('media')=='',
+                'text-block':this.parameters.has('href') && (this.parameters.get('href')!=''),
+                'text-center':this.parameters.has('align') && this.parameters.get('align')=='center'
+               }" (click)="JumpTo(this.parameters.get('href'))">
+
+    <h3 *ngIf="this.parameters.get('title')!=''" [style]="'text-align:'+this.parameters.get('textalign')+';'">
+      {{this.parameters.get('title')}}</h3>
+    <h5 *ngIf="this.parameters.get('subtitle')!=''" [style]="'text-align:'+this.parameters.get('textalign')+';'">
+      {{this.parameters.get('subtitle')}}</h5>
+    <p class="mt-3" [innerHTML]="this.parameters.get('text')"
+      [ngClass]="{'text-center':this.parameters.has('align') && this.parameters.get('align')=='center'}"
+      [style]="'text-align:'+this.parameters.get('textalign')+';'">
+
+    </p>
+
+  </span>
+</div>

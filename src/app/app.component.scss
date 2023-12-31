@@ -1,0 +1,82 @@
+// Aplicación principal esquema de distribución para que el pie quede fijo abajo
+// independientemente del contenido
+@import "../general";
+
+.main-scheme {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  header {
+    flex: 0 0 auto;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  footer {
+    flex: 0 0 auto;
+  }
+}
+
+.info {
+  margin-top: 20px;
+  background-color: $azulkronexilaneoscuro;
+
+  .copyrigth {
+    text-align: center;
+    font-weight: 600;
+    font-size:small;
+    color:white;
+    margin: auto;
+  }
+
+  .visitas {
+    display: flex;
+    margin: auto;
+    color: white !important;
+    justify-content: center;
+  }
+}
+
+@media print {
+
+  // Aplicacion
+  #aplicacion {
+    app-header {
+        display: none !important;
+    }
+
+    header {
+      display: none !important;
+    }
+
+    main {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    footer {
+      display: none !important;
+    }
+    scrolling-button{
+      display: none !important;
+    }
+  }
+
+  // Footer
+  .info {
+    display: none;
+  }
+
+  // Adicionales
+  @page {
+    margin:0;
+    size:auto;
+    @top-left {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,89 @@
+<!--------------- LOGIN ------------>
+<app-login [Autologin]="intro" *ngIf="login; else main" (LoginMessage)="Cambio($event)">
+</app-login>
+
+<!--------------- APLICACIÓN --------->
+<ng-template #main>
+  <!-- HEADER CON LAS IMAGENES -->
+  <div class="row-cols-1 mt-5 p-0">
+    <app-header [images]="imagenes"></app-header>
+  </div>
+  <div id="aplicacion">
+    <!-- ********** CONTENEDOR PRINCIPAL ****************-->
+
+    <!-- HEADER CON LOS MENUS Y PLUGIN SUPERIORES -->
+    <div class="container-xxl main-scheme" id="inicio">
+      <header
+        class="d-flex flex-row justify-content-center d-md-flex flex-md-row w-100 align-items-md-center justify-content-md-start bg-white border border-bottom shadow p-md-2 justify-content-between fixed-top"
+        id="cabeceraX">
+
+
+        <!-- Componente de menús para pantallas pequeñas -->
+        <app-rmainmenu1 idtext="rcapa" menutext="main" class="d-md-none d-inline"></app-rmainmenu1>
+        <app-logotipo class="d-inline d-md-none d-flex"></app-logotipo>
+
+        <!-- Barra de menús para pantallas grandes -->
+        <div class="row">
+          <app-logotipo *ngIf="logo" [Type]="'menu'" class="d-none d-md-inline"></app-logotipo>
+        </div>
+
+        <div class="row" [ngClass]="{ 'ms-auto': menucenter }">
+          <app-mainmenu1 idtext="capa" menutext="main" class="d-none d-md-inline p-1"></app-mainmenu1>
+        </div>
+        <plugin-search *ngIf="search" [special]="specialfunctions" [adjust]="!logo"
+          class="d-none d-md-flex ms-auto"></plugin-search>
+      </header>
+
+      <!--- PANTALLA DE COOKIES WARNING -->
+      <app-cookies-warning *ngIf="cookiesWarning" [setup]="{
+          title: cookiesTitle,
+          text: cookiesText
+        }">
+      </app-cookies-warning>
+      <!--- PRINCIPAL --->
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+      <!-- FOOTER DE DOCUMENTO SIN USAR -->
+      <footer>
+        <app-footer></app-footer>
+      </footer>
+    </div>
+
+    <!--
+      **************************************************************
+        FOOTER GENERAL: MENÚ SOCIAL, COPYRIGHT Y CONTADOR DE VISITAS
+      **************************************************************
+    -->
+    <div class="info">
+      <div class="col-12 pt-2" *ngIf="this.orderfootermenu == 'up' && this.swFooterMenu">
+        <app-pagemenu></app-pagemenu>
+      </div>
+      <hr class="bg-white" *ngIf="this.AllPlugins" />
+
+      <!--------- AQUÍ VAN LOS PLUGINS ---------->
+
+      <div *ngIf="this.AllPlugins"
+        class="d-flex flex-column flex-md-row justify-content-md-around align-items-md-start align-items-center pt-3 pb-3 flex-wrap">
+        <!-- PlUGINS DEL FOOTER -->
+        <div *ngFor="let item of this.AllPlugins">
+          <plugin [config]="item"></plugin>
+        </div>
+      </div>
+      <hr class="bg-white" />
+
+      <!--------- FIN DE LOS PLUGINS ---------->
+      <div *ngIf="this.orderfootermenu == 'down' && this.swFooterMenu">
+        <app-pagemenu></app-pagemenu>
+      </div>
+      <p *ngIf="!logo" class="copyrigth d-flex flex-column align-items-center"><app-logotipo [Type]="'foot'"
+          class="mt-2"></app-logotipo></p>
+      <app-logout *ngIf="logout" [SimpleLogout]="true"></app-logout>
+      <p class="copyrigth mb-2 d-flex flex-column align-items-center">
+        {{copyrigth}}
+      </p>
+      <app-visitcounter [enabled]="visitcounter"></app-visitcounter>
+    </div>
+  </div>
+  <scrolling-button [ButtonStyle]="'circle'"></scrolling-button>
+</ng-template>

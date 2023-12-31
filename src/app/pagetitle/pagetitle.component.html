@@ -1,0 +1,69 @@
+<!--
+      ********************************
+      Header para navegador de objetos
+      ********************************
+-->
+<div *ngIf="navigator else pageTitle" class="w-100 d-flex flex-column h-100 m-auto">
+  <div class="row mb-auto mt-auto d-flex flex-column d-md-flex flex-md-row-reverse">
+    <div *ngIf="navigatorimg!='small'" class="col-md-3 d-none d-md-flex flex-md-colum">
+      <div *ngIf="this.icon!=''" class="d-none d-md-flex m-auto" style="width: 160px; height: 160px;">
+        <img src="{{this.icon}}" class="img-fluid" alt="">
+      </div>
+      <div *ngIf="this.icon!=''" class="m-auto d-flex d-md-none mt-2" style="width: 75px; height: 75px;">
+        <img src="{{this.icon}}" class="img-fluid" alt="">
+      </div>
+    </div>
+
+    <!-- Cabecera Título/Subtitulo de portafolio -->
+    <div class="col-md-9 d-flex flex-column" [ngClass]="{'col-md-12':navigatorimg=='small'}">
+      <div class="d-md-flex">
+        <div class="row text-center text-md-start">
+          <div class="col-12 d-flex justify-content-center align-items-center">
+            <p class="text-white pb-md-4 mt-1">
+              {{portfoliotitle}}<br>
+              {{portfoliosubtitle}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3 mt-md-0">
+        <div class="col-12 d-md-flex align-items-center" [ngClass]="{'paddings-small':navigatorimg=='small'}">
+          <div *ngIf="this.icon!=''" class="d-md-none d-flex m-auto mt-md-auto mb-md-auto me-md-2" style="width: 80px; height: 80px;">
+            <img src="{{this.icon}}" class="img-fluid" alt="">
+          </div>
+          <div *ngIf="navigatorimg=='small'" class="d-none d-md-flex">
+            <div *ngIf="this.icon!=''" class="mt-auto mb-auto me-2" style="width: 80px; height: 80px;">
+              <img src="{{this.icon}}" class="img-fluid" alt="">
+            </div>
+          </div>
+          <span class="nav-title d-flex justify-content-center mt-2 d-none d-md-flex" [ngClass]="{'fs-4 text':webSubTitle.length>45}">{{webSubTitle}}</span>
+          <span class="nav-title d-flex justify-content-center mt-2 d-md-none d-flex" [ngClass]="{'fs-6 text':webSubTitle.length>45}">{{webSubTitle}}</span>
+        </div>
+      </div>
+
+      <div *ngIf="links!=undefined" class="text-light d-flex flex-row" [ngClass]="{'pt-md-0':navigatorimg=='small','mt-md-5 mt-4':navigatorimg!='small'}">
+        <div *ngFor="let e of links; let indice=index">
+          <a href="javascript:void(0)" class="nav-path" [ngClass]="{'text-white':indice==links.length-1}"
+            (click)="GoTo(e,indice)">
+            {{e==''?"INICIO&nbsp;/":"&nbsp;"+e+(indice==links.length-1?'':"&nbsp;/")}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--
+      **************
+      Header general
+      **************
+-->
+<ng-template #pageTitle>
+  <div class="titulo-web" [ngClass]="{'titulo-web-sin-imagen':isSmallScreen() && !headerimg}">
+    <h1 class="mt-1 mt-md-2">{{webTitle}}</h1>
+    <h3 class="mt-2 mt-md-2">{{webSubTitle}}</h3>
+    <h4 id="titulo" class="mt-5 mt-md-5 d-none d-md-block">{{webAuthor}}</h4>
+  </div>
+</ng-template>

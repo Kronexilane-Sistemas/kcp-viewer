@@ -1,0 +1,52 @@
+<div class="d-flex flex-column align-items-start ps-2 pe-2 pt-2 plugin mb-2 mb-md-0 w-100"
+  [ngClass]="{'border-start border-2': config.border==undefined || config.border}">
+  <div class="plugin-title">
+    <span [ngSwitch]="config.command">
+      <h3 class="plugin-title" *ngSwitchCase="Directory && 'kcpdir'">
+        {{Directory.title}}
+      </h3>
+
+      <h3 class="plugin-title" *ngSwitchDefault>
+        {{config.title}}
+      </h3>
+
+    </span>
+  </div>
+  <span [ngSwitch]="config.command">
+
+    <!-- CASE para otro tipos de plugin -->
+
+    <!-- **** PLUGIN Modo CONTENIDO de KCP ****** -->
+    <div *ngSwitchCase="Directory && 'kcpdir'">
+      <div class="plugin-space d-flex flex-column h-100">
+        <div class="plugin-line w-100 d-flex align-content-center ps-1 align-items-center"
+          *ngFor="let linea of this.Directory.subitems" (click)="Selected(linea)">
+          <img *ngIf="config.icon" [src]="linea.urlimg==''?Icon:linea.urlimg" style="width: 20px; height: 20px;" alt="">
+          <span class="ms-1">{{linea.title}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- **** Envolvemos al plugin de Búsqueda ***** -->
+    <div *ngSwitchCase="'search'">
+      <plugin-search [responsive]="true"></plugin-search>
+    </div>
+
+    <!-- ***** Formato por defecto del PLUGIN (Líneas de DATA de Resultados de búsqueda ) **** -->
+    <div *ngSwitchDefault>
+      <div *ngIf="this.Data else NoData">
+        <div class="plugin-space d-flex flex-column h-100">
+          <div class="plugin-line w-100 d-flex align-content-center ps-1 align-items-center align-content-end"
+            *ngFor="let linea of this.Data" (click)="Selected(linea)">
+            <img *ngIf="config.icon" [src]="Icon" style="width: 20px; height: 20px;" alt="">
+            <span class="ms-2">{{linea.title}}</span>
+          </div>
+        </div>
+      </div>
+      <ng-template #NoData>
+        <span class="small text-white">Sín datos</span>
+      </ng-template>
+
+    </div>
+  </span>
+</div>

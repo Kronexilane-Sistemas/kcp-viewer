@@ -1,0 +1,235 @@
+<!-- Componente categories mejorado -->
+
+<div class="container-fluid mt-4" *ngIf="this.DataSource.length!=0">
+  <div class="row">
+    <!--- ESTE ES EL PANEL IZQUIERDO -->
+    <div class="col-12 col-md-8">
+      <!-- BARRA DE HERRAMIENTAS -->
+      <div class="row row-cols-1 mt-2 d-flex w-100 justify-content-center border-bottom border-1">
+        <div class="d-flex flex-row justify-content-center mt-2">
+          <button type="submit" class="d-flex flex-row align-items-center ps-2 pe-2 border border-0 bg-white"
+            [disabled]="this.stackPath.length==0" (click)="Home()">
+            <img src="assets/home.png" alt="" class="me-1">
+            <span class="small">Inicio</span>
+          </button>
+          <button type="submit" class="d-flex flex-row align-items-center ps-2 pe-2 border border-0 bg-white"
+            [disabled]="this.stackPath.length==0" (click)="PreviousCategory()">
+            <img src="assets/previous.png" alt="" class="me-1">
+            <span class="small">Anterior</span>
+          </button>
+          <button type="submit" class="d-none d-md-flex align-items-center ps-2 pe-2 border border-0 bg-white"
+            [disabled]="selCat!.subitems.length==1 && selCat!.subitems[0].name=='.'" (click)="OpenCategory(selCat)">
+            <img src="assets/enter.png" alt="" class="me-1">
+            <span class="small">Entrar</span>
+          </button>
+          <button type="submit" class="d-none d-md-flex align-items-center ps-2 pe-2 border border-0 bg-white"
+            (click)="OrderBy('name',this.navegacion)">
+            <img src="assets/alpha.png" alt="" class="me-1">
+            <span class="small">Nombre</span>
+          </button>
+          <button type="submit" class="d-none d-md-flex align-items-center ps-2 pe-2 border border-0 bg-white"
+            (click)="OrderBy('orderitem',this.navegacion)">
+            <img src="assets/number.png" alt="" class="me-1">
+            <span class="small">Índice</span>
+          </button>
+          <button type="submit" class="d-none d-md-flex align-items-center ps-2 pe-2 border border-0 bg-white"
+            (click)="OrderBy('type',this.navegacion)">
+            <img src="assets/type.png" alt="" class="me-1">
+            <span class="small">Tipo</span>
+          </button>
+
+          <button *ngIf="ResumeTo!=undefined" type="submit"
+            class="d-none d-md-flex align-items-center ps-2 pe-2 border border-0 bg-white" (click)="Exit()">
+            <img src="assets/previousw.png" alt="" class="me-1">
+            <span class="small">Volver a {{ResumeTo}}</span>
+          </button>
+          <krn-paginator #paginator [PageSize]="pageSize" (PartialArray)="paginar($event)"
+            [DataSource]="this.DataSource" [ShowNumberOfRegisters]="true" [ShortInfo]="false" [BetweenPages]="true"
+            [BootstrapStyle]="false" (PageSelected)="PageCurrent($event)" [NumberOfBetweenPages]="0"
+            [StepBetweenPages]="4">
+          </krn-paginator>
+
+        </div>
+        <span class="text-center mt-1 mt-2">
+          <img src="assets/load_.gif" alt="" style="width: 32px; height: 32px;" id="msgLoad">
+          <span class="text-dark p-2">{{msgLoad}}</span>
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-12 d-none d-md-flex justify-content-center">
+          <span class="small mt-1">{{msg_order}}</span>
+        </div>
+      </div>
+      <!-- MUESTRARIO DE CATEGORIAS Y OBJETOS -->
+      <div class="row">
+        <div class="col-12 contenedor-listado-categorias d-flex flex-column flex-md-row">
+          <div *ngFor="let cat of navegacion; let cont=index">
+            <div class="contenedor-categoria" *ngIf="!cat.hide" (dblclick)="OpenCategory(cat)" (click)="CatInfo(cat)">
+              <div class="contenedor-imagen d-flex flex-column align-items-center">
+                <img onerror="this.src='/assets/error-img.png';" src="{{createIcon(cat)}}" class="p-1"
+                  [ngClass]="{'category-marked':this.selectedElement==cat.name}" alt="">
+                <button *ngIf="isContainer(cat)"
+                  class="d-md-none d-flex flex-row align-items-center ps-2 pe-2 border border-1 bg-white justify-content-center m-auto"
+                  [disabled]="cat!.subitems.length==0" (click)="OpenCategory(cat)">
+                  <img src="assets/enter.png" alt="" class="me-1 rounded rounded-0">
+                  <span class="small">Entrar</span>
+                </button>
+                <div class="row mt-1">
+                </div>
+              </div>
+
+
+              <!--
+                Información de icono pantallas pequeñas
+                RESPONSIVE
+              -->
+              <div class="d-md-none text-center w-100 d-flex flex-column align-content-center m-auto">
+                <span class="small d-md-none w-100 text-dark p-2">{{getItemType(cat)}}</span>
+                <h3 class="d-md-none color-krn-oscuro w-100 p-2">{{cat.name}}</h3>
+                <!--<span classs="text-info">{{ChoiceTitle(cat.title)}}</span>-->
+                <!-- Button trigger modal -->
+                <div class="row  w-100">
+                  <div class="col-12 d-flex flex-row">
+                    <button type="button"
+                      class="d-flex flex-row align-items-center ps-2 pe-2 border border-0 bg-white justify-content-center m-auto p-2"
+                      data-bs-toggle="modal" data-bs-target="#infoItem" (click)="selCatDialog=cat">
+                      <img src="assets/info.png" alt="" class="me-1">
+                      <span class="small">Información</span>
+                    </button>
+                    <button type="button" *ngIf="cat.itemtype<=2"
+                      class="d-flex flex-row align-items-center ps-2 pe-2 border border-0 bg-white justify-content-center m-auto p-2"
+                      (click)="ShowDocument(cat)">
+                      <img src="assets/see.png" alt="" class="me-1">
+                      <span class="small">Mostrar</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Información de icono pantallas grandes -->
+              <div class="contenedor-texto d-none d-md-flex w-auto text-center h-100">
+                <span class="cat-name">{{cat.name}} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--- ESTE ES EL PANEL DERECHO -->
+    <div class="col-4 border-start border-1 d-none d-md-inline">
+      <div class="col-12 text-center h-100 align-content-center">
+        <div *ngIf="true" class="row d-flex justify-content-center">
+          <span class="category-name mt-2">
+            {{selCat!.name=='.'?'Contenedor':selCat!.name}}
+          </span>
+          <strong rows="4" class="category-title text-dark d-none d-md-inline mt-1 especial">
+            {{ChoiceTitle(selCat!.title)}}
+          </strong>
+          <strong rows="4" class="small d-none d-md-inline mt-1 color-krn-oscuro">
+            - {{getItemType(selCat)}} -
+          </strong>
+          <div class="info-categoria-imagen d-none d-md-inline">
+            <img onerror="this.src='/assets/error-img.png';" src="{{createIcon(selCat!)}}" alt="">
+          </div>
+          <p class="texto-categoria small mt-3 d-none d-md-inline especial">
+            {{selCat!.subtitle}}
+          </p>
+        </div>
+        <!-- Información panel derecho formato grande -->
+        <div class="row mt-1">
+          <strong  class="text-center">{{selCat!.date | date:'dd/MM/yyyy,
+            H:mm:ss':'GMT-0'}}
+          </strong>
+          <div *ngIf="!(InflateTags(selCat!.tags).length==1 && InflateTags(selCat!.tags)[0]=='')" class="row justify-content-center">
+            <strong class="small mt-2 text-secondary">
+              <img src="assets/tag2.png" alt="">
+              Etiquetas
+            </strong>
+            <div class="col-12 mt-1 d-flex flex-row flex-wrap justify-content-center">
+              <a href="javascript:void(0)" class="tag-navigator ms-2" *ngFor="let i of InflateTags(selCat!.tags)"
+                title="Elementos con el tag '{{i}}'"
+                (click)="SearchFromTag(i)"
+              >
+                {{i}}
+              </a>
+            </div>
+          </div>
+          <app-item-info  [item]="selCat!" [statisc]="statisc" [img]="getIconButton(selCat!)" [small]="false"
+            [buttontext]="'Lanzar ('+selCat!.name+')'">
+          </app-item-info>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  Información del ITEM para tamaño de pantalla pequeño
+  Dialogo modal levantable de BOOTSTRAP
+ -->
+<!--<scrolling-button></scrolling-button>-->
+
+<div class="modal fade" id="infoItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img onerror="this.src='/assets/error-img.png';" src="{{createIcon(selCatDialog!)}}" style="width:32px; height:32px;" alt="">
+        <h5 class="modal-title ms-2" id="staticBackdropLabel"><strong>{{selCatDialog!.name}}</strong></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!isContainer(selCatDialog)" class="row">
+            <div class="col-12 d-flex flex-column align-items-center w-100">
+              <span>Fecha de creación</span>
+              <strong>{{selCatDialog!.date | date:'dd/MM/yyyy, H:mm:ss':'GMT-0'}}</strong>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex flex-column align-items-center w-100">
+            <strong class="fs-6">{{getItemType(selCatDialog!)}}</strong>
+            <span>Título</span>
+            <strong class="text-center small">{{ChoiceTitle(selCatDialog!.title)}}</strong>
+          </div>
+          <div class="col-12 d-flex flex-column align-items-center w-100">
+            <span>Subtítulo</span>
+            <strong class="text-center small">{{ChoiceTitle(selCatDialog!.subtitle)}}</strong>
+          </div>
+        </div>
+
+        <div *ngIf="!(InflateTags(selCat!.tags).length==1 && InflateTags(selCat!.tags)[0]=='')"
+          class="row d-flex flex-column align-items-center w-100 mt-2">
+          <div class="col-12 w-100 d-flex flex-column align-items-center">
+          <strong class="small mt-2 text-secondary">
+            <img src="assets/tag2.png" alt="">
+            Etiquetas
+          </strong>
+          <div class="col-12 mt-1 d-flex flex-row flex-wrap justify-content-center">
+            <a href="javascript:void(0)" class="tag-navigator ms-2" *ngFor="let i of InflateTags(selCat!.tags)"
+              title="Elementos con el tag '{{i}}'"
+              (click)="SearchFromTag(i)"
+              >
+              {{i}}
+            </a>
+          </div>
+          </div>
+        </div>
+        <app-item-info [small]="true" [item]="selCatDialog" [statisc]="statisc" [img]="getIconButton(selCatDialog!)"
+          [buttontext]="'Lanzar ('+selCatDialog!.name+')'" [idResponsive]="'infoItem'"
+        >
+        </app-item-info>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="d-flex flex-row align-items-center ps-2 pe-2 border border-0 bg-white"
+          data-bs-dismiss="modal">
+          <img src="assets/close.png" alt="" class="me-1">
+          <span class="small" aria-label="Close">Cerrar</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,126 @@
+/*
+  Menu principal, estilos de despliegue
+*/
+@import "/src/general";
+
+.krn-menu-dropdown {
+  >a {
+    &:hover {
+      cursor: pointer;
+    }
+
+  }
+
+  &.krn-menu-separator {
+    border-left: 1px solid gray;
+    padding-left: 5px;
+
+    &:first-child {
+      border-left: 0px;
+    }
+  }
+}
+
+.krn-menu-list {
+  display: none;
+  opacity: 100%;
+
+  ul,
+  li {
+    position: relative;
+    z-index: 10;
+    background-color: #fff !important;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  ul {
+    border: 1px solid $azulkronexilaneoscuro;
+    box-shadow: 1px 2px 6px gray;
+    line-height: normal;
+    flex-direction: column;
+    position: absolute;
+    background-color: $griscapas;
+
+    li {
+      border-radius: 10px;
+      width: 100%;
+      padding: 0px 0px 0px 0px;
+      text-align: center;
+
+      &.krn-element-border {
+        border-bottom: 1px solid #000;
+      }
+
+      img {
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      a {
+        display: inline-block;
+        padding: 5px 0px 5px 0px;
+        color: #000;
+        text-decoration: none;
+        border-bottom: none !important;
+        width: 100%;
+
+        &:hover {
+          background-color: $azulkronexilaneclaro;
+          color: white;
+
+        }
+
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+    }
+  }
+
+  .krn-menu-element {
+    display: flex;
+
+    justify-content: center;
+
+    &.italic {
+      font-style: italic;
+    }
+
+  }
+
+  .krn-menu-separator {
+    margin: 0;
+    padding: 0;
+    color: $azulkronexilaneoscuro;
+    width: 100%;
+  }
+}
+
+.krn-menu-collapse {
+  margin: auto;
+  display: none;
+}
+
+a {
+  &.krn-img-text {
+    display: flex;
+    justify-content: center;
+
+    span {
+      margin-left: 5px;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  img {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}

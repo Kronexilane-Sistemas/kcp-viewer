@@ -1,0 +1,54 @@
+// Submenus general HEADER Y FOOTER
+@import "/src/general";
+.submenu {
+  background-color: $azulkronexilaneoscuro;
+  ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    margin-left: 5px;
+
+    li {
+      padding: 10px;
+
+      a {
+        margin-right: 20px;
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          color: $azulkronexilaneclaro;
+          cursor: pointer;
+        }
+
+        &.center-img-text {
+          display: flex;
+          justify-content: center;
+
+          span {
+            margin-left: 5px;
+            margin-top: auto;
+            margin-bottom: auto;
+          }
+        }
+      }
+    }
+  }
+
+  &.centrado {
+    ul {
+      justify-content: center;
+    }
+  }
+
+  &.espaciado {
+    ul {
+      justify-content: space-between;
+    }
+  }
+}
+
+.imagen{
+  width:32px;
+  height:32px;
+}

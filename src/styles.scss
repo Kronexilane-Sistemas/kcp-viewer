@@ -1,0 +1,59 @@
+// Estilos iniciales
+@import "general";
+@import "normalize";
+*{
+  font-family: $font-family;
+  font-size:$font-size;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  max-width:  100%;
+  main{
+    flex: 1 0 auto;
+  }
+}
+
+
+/* --------- CLASES DE UTILIDAD -----------*/
+
+
+// Titulos subrayados
+.titulo-seccion{
+  font-weight: bold;
+  text-align:center;
+  margin-top:10px;
+
+  color:white;
+
+    h6{
+        font-size: 1em;
+        font-weight: 600;
+        text-align:center;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        padding-top: 0;
+        //padding:5px;
+        &.subrayado-seccion{
+        border-bottom: 2px solid white !important;
+        &.sin-cuadro{
+          border:none;
+          box-shadow: none;
+        }
+        &.sin-titulo{
+          display: none;
+        }
+        &.formato-especial{
+          text-align: start;
+          font-weight: 600;
+        }
+    }
+  }
+}

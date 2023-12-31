@@ -1,0 +1,104 @@
+// -- Formateo del botón de Scrolling --
+@import "../../../general";
+
+/******* ------------- BOTONES ------------ *********/
+
+// Estilos botón circulo (predeterminado - arriba -)
+.button-circle-scrolling {
+  display: none;
+  background-position: center;
+  border: 1px solid black;
+  border-radius: 100%;
+  background-image: url("/assets/subir5.png");
+  background-size: contain;
+
+  background-color: transparent;
+  cursor: pointer;
+  position: fixed;
+  opacity: 100%;
+  bottom: 5px;
+  right: 5px;
+  padding: 20px;
+
+  background-color: $azulkronexilaneclaro;
+  z-index: 100;
+}
+
+// Estilos botón cuadrado (predeterminado - arriba -)
+.button-square-scrolling {
+  display: none;
+  background-color: #002E5B;
+  cursor: pointer;
+  position: fixed;
+  opacity: 100%;
+  bottom: 10px;
+  right: 20px;
+  padding: 5px;
+  z-index: 100;
+
+  &:hover {
+    background-color: $azulkronexilaneclaro;
+    transition: background-color 1s ease-out;
+  }
+}
+
+// Estilos botón cuadrado (previous)
+.button-square-previous-scrolling {
+  display: none;
+  background-color: #002E5B;
+  cursor: pointer;
+  position: fixed;
+  opacity: 100%;
+  bottom: 10px;
+  right: 100px;
+  padding: 5px;
+  z-index: 100;
+
+  &:hover {
+    background-color: $azulkronexilaneclaro;
+    transition: background-color 1s ease-out;
+  }
+}
+
+/******* -------- TOOLBAR --------------- *********/
+// Estilo toolbar 1 (Flotante abajo)
+.toolbar-scrolling {
+  display: none;
+  background-color: white; // hsl(210, 100%, 18%);
+  border: 1px solid black;
+  box-shadow: 1px 2px 3px gray;
+  //background-color: $azulkronexilaneclaro;
+  opacity: 100%;
+  position: fixed;
+  //width: 900px;
+  height: 40px;
+  //top: 20%;
+  bottom: 10px;
+  left: 20px;
+  margin-top: -100px;
+
+  z-index: 999;
+
+  button {
+    &:hover {
+      background-color: red;
+    }
+  }
+}
+
+// Estilo toolbar 2 (Relativa al documento)
+.toolbar2-scrolling {
+  display: none;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.button-toolbar {
+  span {
+    font-weight:600;
+    &:hover{
+      color:#f07121;
+    }
+  }
+}
